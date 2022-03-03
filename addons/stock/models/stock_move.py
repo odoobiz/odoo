@@ -1335,7 +1335,10 @@ class StockMove(models.Model):
                 if all(state in ('done', 'cancel') for state in siblings_states):
                     move.move_dest_ids.write({'procure_method': 'make_to_stock'})
                     move.move_dest_ids.write({'move_orig_ids': [(3, move.id, 0)]})
-        self.write({'state': 'cancel', 'move_orig_ids': [(5, 0, 0)]})
+        #self.write({'state': 'cancel', 'move_orig_ids': [(5, 0, 0)]})
+        self.write({'state': 'cancel'})
+        if self.move_orig_ids:
+            self.write({'move_orig_ids': [(5, 0, 0)]})
         return True
 
     def _prepare_extra_move_vals(self, qty):
