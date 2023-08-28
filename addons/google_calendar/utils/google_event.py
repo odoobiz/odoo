@@ -5,6 +5,7 @@ from odoo.tools import email_normalize
 import logging
 from typing import Iterator, Mapping
 from collections import abc
+import re
 
 _logger = logging.getLogger(__name__)
 
@@ -170,6 +171,33 @@ class GoogleEvent(abc.Set):
     def is_recurrence_follower(self):
         return bool(not self.originalStartTime or self.originalStartTime == self.start)
 
+    def full_recurring_event_id(self):
+        """
+            Give the complete identifier with elements
+            in `id` and `recurringEventId`.
+            :return: concatenation of the id created by the recurrence
+                    and the id created by the modification of a specific event
+            :rtype: string if recurrent event and correct ids, `None` otherwise
+        """
+        # Regex expressions to match elements (according to the google support [not documented]):
+        # - ID: [a-zA-Z0-9]+
+        # - RANGE: R[0-9]+T[0-9]+
+        # - TIMESTAMP: [0-9]+T[0-9]+Z
+        # With:
+        # - id: 'ID_TIMESTAMP'
+        # - recurringEventID: 'ID_RANGE'
+        # Find: 'ID_RANGE_TIMESTAMP'
+        if not self.is_recurrent():
+            return None
+        # Check if ids are the same
+        id_value = re.match(r'(\w+_)', self.id)
+        recurringEventId_value = re.match(r'(\w+_)', self.recurringEventId)
+        if not id_value or not recurringEventId_value or id_value.group(1) != recurringEventId_value.group(1):
+            return None
+        ID_RANGE = re.search(r'\w+_R\d+T\d+', self.recurringEventId).group()
+        TIMESTAMP = re.search(r'\d+T\d+Z', self.id).group()
+        return f"{ID_RANGE}_{TIMESTAMP}"
+
     def cancelled(self):
         return self.filter(lambda e: e.status == 'cancelled')
 
@@ -193,3 +221,12 @@ class GoogleEvent(abc.Set):
         if all(not e.is_recurrence() for e in self):
             return env['calendar.event']
         raise TypeError("Mixing Google events and Google recurrences")
+
+    def get_meeting_url(self):
+        if not self.conferenceData:
+            return False
+        video_meeting = list(filter(lambda entryPoints: entryPoints['entryPointType'] == 'video', self.conferenceData['entryPoints']))
+        return video_meeting[0]['uri'] if video_meeting else False
+
+    def is_available(self):
+        return self.transparency == 'transparent'

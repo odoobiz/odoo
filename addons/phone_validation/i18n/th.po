@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Martin Trigaux, 2021
+# Wichanon Jamwutthipreecha, 2021
 # 
 msgid ""
 msgstr ""
@@ -11,8 +12,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-14 10:29+0000\n"
 "PO-Revision-Date: 2021-09-14 12:24+0000\n"
-"Last-Translator: Martin Trigaux, 2021\n"
-"Language-Team: Thai (https://www.transifex.com/odoo/teams/41243/th/)\n"
+"Last-Translator: Wichanon Jamwutthipreecha, 2021\n"
+"Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -67,7 +68,7 @@ msgstr "Blacklist Date"
 #. module: phone_validation
 #: model:ir.model.fields,field_description:phone_validation.field_mail_thread_phone__mobile_blacklisted
 msgid "Blacklisted Phone Is Mobile"
-msgstr ""
+msgstr "โทรศัพท์ในบัญชีดำคือมือถือ"
 
 #. module: phone_validation
 #: model:ir.actions.act_window,name:phone_validation.phone_blacklist_action
@@ -77,7 +78,7 @@ msgstr ""
 #. module: phone_validation
 #: model:ir.model.fields,field_description:phone_validation.field_mail_thread_phone__phone_blacklisted
 msgid "Blacklisted Phone is Phone"
-msgstr ""
+msgstr "โทรศัพท์ในบัญชีดำคือมือถือ"
 
 #. module: phone_validation
 #: model_terms:ir.actions.act_window,help:phone_validation.phone_blacklist_action
@@ -123,6 +124,7 @@ msgid ""
 "Field used to store sanitized phone number. Helps speeding up searches and "
 "comparisons."
 msgstr ""
+"ช่องที่ใช้เก็บหมายเลขโทรศัพท์ที่ถูกสุขอนามัย ช่วยเร่งการค้นหาและเปรียบเทียบ"
 
 #. module: phone_validation
 #: model:ir.model.fields,field_description:phone_validation.field_mail_thread_phone__message_follower_ids
@@ -140,7 +142,7 @@ msgstr "ผู้ติดตาม (คู่ค้า)"
 #: model:ir.model.fields,field_description:phone_validation.field_mail_thread_phone__has_message
 #: model:ir.model.fields,field_description:phone_validation.field_phone_blacklist__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "มีข้อความ"
 
 #. module: phone_validation
 #: model:ir.model.fields,field_description:phone_validation.field_phone_blacklist__id
@@ -168,6 +170,8 @@ msgid ""
 "If the sanitized phone number is on the blacklist, the contact won't receive"
 " mass mailing sms anymore, from any list"
 msgstr ""
+"หากหมายเลขโทรศัพท์ที่ถูกฆ่าเชื้ออยู่ในบัญชีดำ ผู้ติดต่อจะไม่ได้รับ SMS "
+"ทางไปรษณีย์อีกต่อไปจากรายชื่อใดๆ"
 
 #. module: phone_validation
 #: code:addons/phone_validation/tools/phone_validation.py:0
@@ -182,6 +186,9 @@ msgid ""
 "distinguish which number is blacklisted             when there is both a "
 "mobile and phone field in a model."
 msgstr ""
+"ระบุว่าหมายเลขโทรศัพท์ที่ถูกฆ่าเชื้อในบัญชีดำเป็นหมายเลขโทรศัพท์มือถือหรือไม่"
+" "
+"ช่วยแยกแยะว่าหมายเลขใดถูกขึ้นบัญชีดำเมื่อมีทั้งช่องโทรศัพท์มือถือและโทรศัพท์ในแบบจำลอง"
 
 #. module: phone_validation
 #: model:ir.model.fields,help:phone_validation.field_mail_thread_phone__phone_blacklisted
@@ -190,6 +197,8 @@ msgid ""
 "distinguish which number is blacklisted             when there is both a "
 "mobile and phone field in a model."
 msgstr ""
+"ระบุว่าหมายเลขโทรศัพท์ที่ถูกฆ่าเชื้อในบัญชีดำเป็นหมายเลขโทรศัพท์หรือไม่ "
+"ช่วยแยกแยะว่าหมายเลขใดถูกขึ้นบัญชีดำเมื่อมีทั้งช่องโทรศัพท์มือถือและโทรศัพท์ในแบบจำลอง"
 
 #. module: phone_validation
 #: code:addons/phone_validation/tools/phone_validation.py:0
@@ -245,6 +254,12 @@ msgstr "เกิดการผิดพลาดในการส่งข้
 #: model:ir.model.fields,field_description:phone_validation.field_phone_blacklist__message_ids
 msgid "Messages"
 msgstr "ข้อความ"
+
+#. module: phone_validation
+#: code:addons/phone_validation/models/mail_thread_phone.py:0
+#, python-format
+msgid "Missing definition of phone fields."
+msgstr ""
 
 #. module: phone_validation
 #: model:ir.model.constraint,message:phone_validation.constraint_phone_blacklist_unique_number
@@ -307,7 +322,7 @@ msgstr ""
 #. module: phone_validation
 #: model:ir.model.fields,field_description:phone_validation.field_mail_thread_phone__phone_sanitized_blacklisted
 msgid "Phone Blacklisted"
-msgstr ""
+msgstr "โทรศัพท์ขึ้นบัญชีดำ"
 
 #. module: phone_validation
 #: model:ir.model.fields,field_description:phone_validation.field_phone_blacklist__number
@@ -319,7 +334,7 @@ msgstr "หมายเลขโทรศัพท์"
 #. module: phone_validation
 #: model:ir.model.fields,field_description:phone_validation.field_mail_thread_phone__phone_mobile_search
 msgid "Phone/Mobile"
-msgstr ""
+msgstr "โทรศัพท์/มือถือ"
 
 #. module: phone_validation
 #: code:addons/phone_validation/models/mail_thread_phone.py:0
@@ -342,7 +357,7 @@ msgstr ""
 #. module: phone_validation
 #: model:ir.model.fields,field_description:phone_validation.field_mail_thread_phone__phone_sanitized
 msgid "Sanitized Number"
-msgstr ""
+msgstr "เบอร์สุขภัณฑ์"
 
 #. module: phone_validation
 #: code:addons/phone_validation/tools/phone_validation.py:0

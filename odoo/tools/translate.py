@@ -22,6 +22,7 @@ from babel.messages import extract
 from lxml import etree, html
 
 import odoo
+from odoo.exceptions import UserError
 from . import config, pycompat
 from .misc import file_open, get_iso_codes, SKIPPED_ELEMENT_TYPES
 
@@ -141,7 +142,7 @@ TRANSLATED_ELEMENTS = {
     'abbr', 'b', 'bdi', 'bdo', 'br', 'cite', 'code', 'data', 'del', 'dfn', 'em',
     'font', 'i', 'ins', 'kbd', 'keygen', 'mark', 'math', 'meter', 'output',
     'progress', 'q', 'ruby', 's', 'samp', 'small', 'span', 'strong', 'sub',
-    'sup', 'time', 'u', 'var', 'wbr', 'text',
+    'sup', 'time', 'u', 'var', 'wbr', 'text', 'select', 'option',
 }
 
 # Which attributes must be translated. This is a dict, where the value indicates
@@ -264,7 +265,7 @@ def translate_xml_node(node, callback, parse, serialize):
 
         # translate the attributes of the node
         for key, val in node.attrib.items():
-            if val and key in TRANSLATED_ATTRS and TRANSLATED_ATTRS[key](node):
+            if nonspace(val) and key in TRANSLATED_ATTRS and TRANSLATED_ATTRS[key](node):
                 node.set(key, callback(val.strip()) or val)
 
     process(node)
@@ -281,7 +282,11 @@ def serialize_xml(node):
 _HTML_PARSER = etree.HTMLParser(encoding='utf8')
 
 def parse_html(text):
-    return html.fragment_fromstring(text, parser=_HTML_PARSER)
+    try:
+        parse = html.fragment_fromstring(text, parser=_HTML_PARSER)
+    except TypeError as e:
+        raise UserError(_("Error while parsing view:\n\n%s") % e) from e
+    return parse
 
 def serialize_html(node):
     return etree.tostring(node, method='html', encoding='unicode')
@@ -357,7 +362,7 @@ class GettextAlias(object):
 
     def _get_db(self):
         # find current DB based on thread/worker db name (see netsvc)
-        db_name = getattr(threading.currentThread(), 'dbname', None)
+        db_name = getattr(threading.current_thread(), 'dbname', None)
         if db_name:
             return odoo.sql_db.db_connect(db_name)
 

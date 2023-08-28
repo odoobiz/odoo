@@ -54,6 +54,7 @@ const _DialogLinkWidget = Link.extend({
         }
         this.data.isNewWindow = data.isNewWindow;
         this.final_data = this.data;
+        return Promise.resolve();
     },
 
     //--------------------------------------------------------------------------
@@ -73,13 +74,22 @@ const _DialogLinkWidget = Link.extend({
             href: data.url && data.url.length ? data.url : '#',
             class: `${data.classes.replace(/float-\w+/, '')} o_btn_preview`,
         };
-        this.$("#link-preview").attr(attrs).html((data.content && data.content.length) ? data.content : data.url);
+
+        const $linkPreview = this.$("#link-preview");
+        $linkPreview.attr(attrs);
+        this._updateLinkContent($linkPreview, data, { force: true });
     },
     /**
      * @override
      */
     _doStripDomain: function () {
         return this.$('#o_link_dialog_url_strip_domain').prop('checked');
+    },
+    /**
+     * @override
+     */
+    _getIsNewWindowFormRow() {
+        return this.$('input[name="is_new_window"]').closest('.form-group');
     },
     /**
      * @override
@@ -171,6 +181,7 @@ const _DialogLinkWidget = Link.extend({
     _onURLInput: function () {
         this._super(...arguments);
         this.$('#o_link_dialog_url_input').closest('.form-group').removeClass('o_has_error').find('.form-control, .custom-select').removeClass('is-invalid');
+        this._adaptPreview();
     },
 });
 
@@ -196,9 +207,12 @@ const LinkDialog = Dialog.extend({
      * @override
      */
     save: function () {
-        this.linkWidget.save();
-        this.final_data = this.linkWidget.final_data;
-        return this._super(...arguments);
+        const _super = this._super.bind(this);
+        const saveArguments = arguments;
+        return this.linkWidget.save().then(() => {
+            this.final_data = this.linkWidget.final_data;
+            return _super(...saveArguments);
+        });
     },
 });
 

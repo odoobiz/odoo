@@ -11,7 +11,10 @@
 # Michal Veselý <michal@veselyberanek.net>, 2021
 # Rastislav Brencic <rastislav.brencic@azet.sk>, 2021
 # karolína schusterová <karolina.schusterova@vdp.sk>, 2021
-# trendspotter <jirka.p@volny.cz>, 2021
+# Tomas Bosek, 2022
+# Jiří Podhorecký, 2023
+# Aleš Fiala <f.ales1@seznam.cz>, 2023
+# Jakub Smolka, 2023
 # 
 msgid ""
 msgstr ""
@@ -19,8 +22,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-05 10:53+0000\n"
 "PO-Revision-Date: 2021-09-14 12:29+0000\n"
-"Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
-"Language-Team: Czech (https://www.transifex.com/odoo/teams/41243/cs/)\n"
+"Last-Translator: Jakub Smolka, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -574,11 +577,11 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_sidebar
 msgid ""
-"<span class=\"badge badge-pill badge-success py-1 px-2 mx-auto\" style"
-"=\"font-size: 1em\"><i class=\"fa fa-check\"/> Completed</span>"
+"<span class=\"badge badge-pill badge-success py-1 px-2 mx-auto\" "
+"style=\"font-size: 1em\"><i class=\"fa fa-check\"/> Completed</span>"
 msgstr ""
-"<span class=\"badge badge-pill badge-success py-1 px-2 mx-auto\" style"
-"=\"font-size: 1em\"><i class=\"fa fa-check\"/> Dokončeno</span>"
+"<span class=\"badge badge-pill badge-success py-1 px-2 mx-auto\" "
+"style=\"font-size: 1em\"><i class=\"fa fa-check\"/> Dokončeno</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_fullscreen
@@ -1343,7 +1346,7 @@ msgstr "Možno komentovat"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__can_edit_body
 msgid "Can Edit Body"
-msgstr ""
+msgstr "Může upravovat tělo"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__can_publish
@@ -1769,6 +1772,8 @@ msgid ""
 "Congratulations, your course has been created, but there isn't any content "
 "yet. First, let's add a <b>Section</b> to give your course a structure."
 msgstr ""
+"Gratuluji, Váš kurz byl vytvořen. Není v něm však žádný obsah. Pojďme přidat"
+" <b>Sekci</b> a dát tak Vašemu kurzu strukturu."
 
 #. module: website_slides
 #: model:ir.model,name:website_slides.model_res_partner
@@ -1927,7 +1932,7 @@ msgstr "Název skupiny kurzů"
 #: model:ir.actions.act_window,name:website_slides.slide_channel_tag_group_action
 #: model:ir.ui.menu,name:website_slides.website_slides_menu_config_course_groups
 msgid "Course Groups"
-msgstr ""
+msgstr "Skupiny kurzů"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_tree
@@ -3068,7 +3073,7 @@ msgstr ""
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__is_mail_template_editor
 msgid "Is Editor"
-msgstr ""
+msgstr "Je Editor"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_is_follower
@@ -3660,7 +3665,7 @@ msgstr "Prezentace není k dispozici."
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_all
 msgid "No results found for '"
-msgstr ""
+msgstr "Nenašly se výsledky pro '"
 
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel__promote_strategy__none
@@ -3801,6 +3806,10 @@ msgid ""
 "a placeholder expression that provides the appropriate language, e.g. {{ "
 "object.partner_id.lang }}."
 msgstr ""
+"Volitelný překladový jazyk (kód ISO), který lze vybrat při odesílání "
+"e-mailu. Pokud není nastavena, bude použita anglická verze. To by měl být "
+"obvykle zástupný výraz, který poskytuje vhodný jazyk, např. "
+"{{object.partner_id.lang}}."
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel_invite__null_value
@@ -4179,7 +4188,7 @@ msgstr "Odebrat tuto odpověď"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__render_model
 msgid "Rendering Model"
-msgstr ""
+msgstr "Vykreslování modelu"
 
 #. module: website_slides
 #: model:ir.ui.menu,name:website_slides.website_slides_menu_report
@@ -4400,6 +4409,12 @@ msgstr "Název sekce"
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__access_token
 msgid "Security Token"
 msgstr "Bezpečnostní token"
+
+#. module: website_slides
+#: code:addons/website_slides/models/res_users.py:0
+#, python-format
+msgid "See our eLearning"
+msgstr ""
 
 #. module: website_slides
 #. openerp-web
@@ -5243,7 +5258,7 @@ msgstr "Pohled"
 #: model_terms:ir.ui.view,arch_db:website_slides.slides_home_user_achievements_small
 #: model_terms:ir.ui.view,arch_db:website_slides.toggle_leaderboard
 msgid "View all"
-msgstr ""
+msgstr "Zobrazit vše"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
@@ -5298,7 +5313,7 @@ msgstr "Ohodnocení"
 #: code:addons/website_slides/static/src/js/slides_slide_like.js:0
 #, python-format
 msgid "Votes and comments are disabled for this course"
-msgstr ""
+msgstr "Hlasování a komentáře jsou pro tento kurz zakázány"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_search
@@ -5519,6 +5534,14 @@ msgstr "XP"
 #, python-format
 msgid "Yes"
 msgstr "Ano"
+
+#. module: website_slides
+#: code:addons/website_slides/wizard/slide_channel_invite.py:0
+#, python-format
+msgid ""
+"You are not allowed to add members to this course. Please contact the course"
+" responsible or an administrator."
+msgstr ""
 
 #. module: website_slides
 #. openerp-web

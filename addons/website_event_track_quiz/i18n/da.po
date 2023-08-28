@@ -3,7 +3,8 @@
 # 	* website_event_track_quiz
 # 
 # Translators:
-# Martin Trigaux, 2021
+# lhmflexerp <lhm@flexerp.dk>, 2022
+# Martin Trigaux, 2023
 # 
 msgid ""
 msgstr ""
@@ -11,8 +12,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-14 10:29+0000\n"
 "PO-Revision-Date: 2021-09-14 12:28+0000\n"
-"Last-Translator: Martin Trigaux, 2021\n"
-"Language-Team: Danish (https://www.transifex.com/odoo/teams/41243/da/)\n"
+"Last-Translator: Martin Trigaux, 2023\n"
+"Language-Team: Danish (https://app.transifex.com/odoo/teams/41243/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -192,7 +193,7 @@ msgstr ""
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_view_form
 msgid "Go to Quiz"
-msgstr ""
+msgstr "Gå til quiz"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_search
@@ -450,6 +451,11 @@ msgid "Search courses"
 msgstr "Søg kurser"
 
 #. module: website_event_track_quiz
+#: model_terms:ir.ui.view,arch_db:website_event_track_quiz.leaderboard_search_bar
+msgid "Search users"
+msgstr "Søg brugere"
+
+#. module: website_event_track_quiz
 #: model:event.quiz,name:website_event_track_quiz.event_7_track_5_quiz
 msgid "Securing your Lumber during transport"
 msgstr "Sikring af dit Tømmer under transport"
@@ -480,7 +486,7 @@ msgstr "Tag Quizzen"
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #, python-format
 msgid "The correct answer was:"
-msgstr ""
+msgstr "Det korrekte svar var:"
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_leaderboard

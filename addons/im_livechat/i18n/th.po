@@ -4,18 +4,19 @@
 # 
 # Translators:
 # Seksan Poltree <seksan.poltree@gmail.com>, 2021
-# Martin Trigaux, 2021
 # Khwunchai Jaengsawang <khwunchai.j@ku.th>, 2021
 # Odoo Thaidev <odoothaidev@gmail.com>, 2021
+# Martin Trigaux, 2022
+# Wichanon Jamwutthipreecha, 2022
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.5\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 10:28+0000\n"
+"POT-Creation-Date: 2022-08-24 01:53+0000\n"
 "PO-Revision-Date: 2021-09-14 12:23+0000\n"
-"Last-Translator: Odoo Thaidev <odoothaidev@gmail.com>, 2021\n"
-"Language-Team: Thai (https://www.transifex.com/odoo/teams/41243/th/)\n"
+"Last-Translator: Wichanon Jamwutthipreecha, 2022\n"
+"Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -30,7 +31,7 @@ msgstr ""
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__rating_count
 msgid "# Ratings"
-msgstr ""
+msgstr "# การให้คะแนน"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_operator__nbr_channel
@@ -45,7 +46,7 @@ msgstr ""
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "% Happy"
-msgstr ""
+msgstr "% มีความสุข"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_digest_digest__kpi_livechat_rating
@@ -216,7 +217,7 @@ msgstr ""
 #: code:addons/im_livechat/static/src/legacy/public_livechat.xml:0
 #, python-format
 msgid "Bad"
-msgstr ""
+msgstr "แย่"
 
 #. module: im_livechat
 #. openerp-web
@@ -457,7 +458,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:im_livechat.rating_rating_action_livechat_report
 #: model:ir.ui.menu,name:im_livechat.rating_rating_menu_livechat
 msgid "Customer Ratings"
-msgstr ""
+msgstr "การให้คะแนนลูกค้า"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel__day_number
@@ -535,7 +536,7 @@ msgstr "จัดระเบียบ"
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_mail_channel
 msgid "Discussion Channel"
-msgstr ""
+msgstr "ช่องทางการสนทนา"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__display_name
@@ -621,8 +622,20 @@ msgid "Group By..."
 msgstr "จัดกลุ่มตาม..."
 
 #. module: im_livechat
+#: code:addons/im_livechat/models/im_livechat_channel.py:0
+#: model:im_livechat.channel,button_text:im_livechat.im_livechat_channel_data
+#, python-format
+msgid "Have a Question? Chat with us."
+msgstr ""
+
+#. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__header_background_color
 msgid "Header Background Color"
+msgstr ""
+
+#. module: im_livechat
+#: model:im_livechat.channel,default_message:im_livechat.im_livechat_channel_data
+msgid "Hello, how may I help you?"
 msgstr ""
 
 #. module: im_livechat
@@ -644,6 +657,7 @@ msgstr ""
 
 #. module: im_livechat
 #. openerp-web
+#: code:addons/im_livechat/models/im_livechat_channel.py:0
 #: code:addons/im_livechat/static/src/legacy/public_livechat.js:0
 #, python-format
 msgid "How may I help you?"
@@ -797,7 +811,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:im_livechat.res_users_form_view
 #, python-format
 msgid "Livechat"
-msgstr ""
+msgstr "ไลฟ์แชท"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -813,7 +827,7 @@ msgstr ""
 #: model:ir.model,name:im_livechat.model_im_livechat_channel
 #: model_terms:ir.ui.view,arch_db:im_livechat.rating_rating_view_search_livechat
 msgid "Livechat Channel"
-msgstr ""
+msgstr "ช่องทางไลฟ์แชท"
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_im_livechat_channel_rule
@@ -915,6 +929,11 @@ msgid "Matching order"
 msgstr ""
 
 #. module: im_livechat
+#: model:ir.model,name:im_livechat.model_mail_message
+msgid "Message"
+msgstr "ข้อความ"
+
+#. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_search
 msgid "Missed sessions"
 msgstr ""
@@ -955,7 +974,7 @@ msgstr ""
 #. module: im_livechat
 #: model_terms:ir.actions.act_window,help:im_livechat.im_livechat_report_channel_time_to_answer_action
 msgid "No data yet!"
-msgstr ""
+msgstr "ยังไม่มีข้อมูล!"
 
 #. module: im_livechat
 #: code:addons/im_livechat/models/mail_channel.py:0
@@ -1081,12 +1100,12 @@ msgstr "ตัวเลือก"
 #: code:addons/im_livechat/static/src/legacy/public_livechat.xml:0
 #, python-format
 msgid "PDF file"
-msgstr ""
+msgstr "ไฟล์ PDF"
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel__rating_percentage_satisfaction
 msgid "Percentage of happy ratings"
-msgstr ""
+msgstr "เปอร์เซ็นการให้คะแนนความสุข"
 
 #. module: im_livechat
 #. openerp-web
@@ -1138,37 +1157,37 @@ msgstr "พิมพ์"
 #: model_terms:ir.ui.view,arch_db:im_livechat.mail_channel_view_tree
 #: model_terms:ir.ui.view,arch_db:im_livechat.rating_rating_view_form_livechat
 msgid "Rating"
-msgstr ""
+msgstr "การให้คะแนน"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_mail_channel__rating_avg
 msgid "Rating Average"
-msgstr ""
+msgstr "คะแนนเฉลี่ย"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_mail_channel__rating_last_feedback
 msgid "Rating Last Feedback"
-msgstr ""
+msgstr "การให้คะแนน ความคิดเห็นล่าสุด"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_mail_channel__rating_last_image
 msgid "Rating Last Image"
-msgstr ""
+msgstr "ให้คะแนนภาพสุดท้าย"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_mail_channel__rating_last_value
 msgid "Rating Last Value"
-msgstr ""
+msgstr "เรตติ้งค่าสุดท้าย"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__rating_percentage_satisfaction
 msgid "Rating Satisfaction"
-msgstr ""
+msgstr "การให้คะแนนความพึงพอใจ"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_mail_channel__rating_count
 msgid "Rating count"
-msgstr ""
+msgstr "จำนวนการให้คะแนน"
 
 #. module: im_livechat
 #. openerp-web
@@ -1180,7 +1199,7 @@ msgstr ""
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__rating_ids
 msgid "Ratings"
-msgstr ""
+msgstr "การให้คะแนน"
 
 #. module: im_livechat
 #: model:ir.actions.act_window,name:im_livechat.rating_rating_action_livechat
@@ -1198,7 +1217,7 @@ msgstr "พร้อม"
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_mail_channel__rating_last_feedback
 msgid "Reason of the rating"
-msgstr ""
+msgstr "เหตุผลของการให้คะแนน"
 
 #. module: im_livechat
 #. openerp-web
@@ -1557,7 +1576,7 @@ msgstr "ยังไม่กำหนด"
 #: code:addons/im_livechat/static/src/legacy/public_livechat.xml:0
 #, python-format
 msgid "Uploaded"
-msgstr ""
+msgstr "อัปโหลด"
 
 #. module: im_livechat
 #. openerp-web
@@ -1579,6 +1598,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "User"
 msgstr "ผู้ใช้งาน"
+
+#. module: im_livechat
+#: model:ir.model.fields,field_description:im_livechat.field_res_partner__user_livechat_username
+#: model:ir.model.fields,field_description:im_livechat.field_res_users__user_livechat_username
+msgid "User Livechat Username"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_res_users_settings
@@ -1604,7 +1629,7 @@ msgstr ""
 #: code:addons/im_livechat/static/src/legacy/public_livechat.xml:0
 #, python-format
 msgid "User is online"
-msgstr ""
+msgstr "ผู้ใช้กำลังออนไลน์"
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_res_users
@@ -1681,7 +1706,7 @@ msgstr ""
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__web_page
 msgid "Web Page"
-msgstr ""
+msgstr "เว็บเพจ"
 
 #. module: im_livechat
 #: model:ir.actions.act_window,name:im_livechat.im_livechat_channel_action
@@ -1696,7 +1721,7 @@ msgstr "ข้อความต้อนรับ"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "Widget"
-msgstr ""
+msgstr "วิดเจ็ต"
 
 #. module: im_livechat
 #. openerp-web
@@ -1724,7 +1749,7 @@ msgstr ""
 #: code:addons/im_livechat/static/src/legacy/public_livechat.xml:0
 #, python-format
 msgid "Zoom In"
-msgstr ""
+msgstr "ขยายเข้า"
 
 #. module: im_livechat
 #. openerp-web
@@ -1732,7 +1757,7 @@ msgstr ""
 #: code:addons/im_livechat/static/src/legacy/public_livechat.xml:0
 #, python-format
 msgid "Zoom Out"
-msgstr ""
+msgstr "ขยายออก"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_rule_view_form
@@ -1754,7 +1779,7 @@ msgstr "เช่น YourWebsite.com"
 #: code:addons/im_livechat/static/src/legacy/public_livechat.xml:0
 #, python-format
 msgid "from"
-msgstr ""
+msgstr "จาก"
 
 #. module: im_livechat
 #. openerp-web

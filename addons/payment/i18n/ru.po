@@ -5,53 +5,30 @@
 # Translators:
 # Viktor Pogrebniak <vp@aifil.ru>, 2021
 # Dinar <gabbasov@it-projects.info>, 2021
-# Martin Trigaux, 2021
-# Ivan Yelizariev // IEL <yelizariev@itpp.dev>, 2021
+# Ivan Kropotkin <yelizariev@itpp.dev>, 2021
 # Sergey Vilizhanin, 2021
 # Vasiliy Korobatov <korobatov@gmail.com>, 2021
 # ILMIR <karamov@it-projects.info>, 2021
 # sergeiruzkiicode <sergei.ruzki@icode.by>, 2021
-# Oleg Kuryan <oleg@ventor.tech>, 2021
 # Irina Fedulova <istartlin@gmail.com>, 2021
 # Сергей Шебанин <sergey@shebanin.ru>, 2021
+# Oleg Kuryan <oleg@ventor.tech>, 2022
+# Martin Trigaux, 2022
+# alenafairy, 2023
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.5\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 10:29+0000\n"
+"POT-Creation-Date: 2022-05-10 14:27+0000\n"
 "PO-Revision-Date: 2021-09-14 12:24+0000\n"
-"Last-Translator: Сергей Шебанин <sergey@shebanin.ru>, 2021\n"
-"Language-Team: Russian (https://www.transifex.com/odoo/teams/41243/ru/)\n"
+"Last-Translator: alenafairy, 2023\n"
+"Language-Team: Russian (https://app.transifex.com/odoo/teams/41243/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
-
-#. module: payment
-#: code:addons/payment/models/payment_transaction.py:0
-#, python-format
-msgid ""
-"\n"
-"Error: %s"
-msgstr ""
-
-#. module: payment
-#: code:addons/payment/models/payment_transaction.py:0
-#, python-format
-msgid ""
-"\n"
-"Reason: %s"
-msgstr ""
-
-#. module: payment
-#: code:addons/payment/models/payment_transaction.py:0
-#, python-format
-msgid ""
-"\n"
-"The related payment is posted: %s"
-msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_acquirer_onboarding_wizard___data_fetched
@@ -255,6 +232,11 @@ msgstr "список эквайеров"
 #: model_terms:ir.ui.view,arch_db:payment.payment_acquirer_kanban
 msgid "Activate"
 msgstr "Включить"
+
+#. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.onboarding_payment_acquirer_step
+msgid "Activate Stripe"
+msgstr "Активировать функцию"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_token__active
@@ -474,11 +456,6 @@ msgid "Choose a payment method"
 msgstr "Упорядочить оплаты"
 
 #. module: payment
-#: model_terms:ir.ui.view,arch_db:payment.onboarding_payment_acquirer_step
-msgid "Choose your default customer payment method."
-msgstr ""
-
-#. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__partner_city
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form
 msgid "City"
@@ -619,6 +596,11 @@ msgid "Credentials"
 msgstr "Полномочия"
 
 #. module: payment
+#: model:payment.acquirer,display_as:payment.payment_acquirer_stripe
+msgid "Credit & Debit Card"
+msgstr ""
+
+#. module: payment
 #: model:payment.acquirer,display_as:payment.payment_acquirer_adyen
 msgid "Credit Card (powered by Adyen)"
 msgstr ""
@@ -656,11 +638,6 @@ msgstr ""
 #. module: payment
 #: model:payment.acquirer,display_as:payment.payment_acquirer_sips
 msgid "Credit Card (powered by Sips)"
-msgstr ""
-
-#. module: payment
-#: model:payment.acquirer,display_as:payment.payment_acquirer_stripe
-msgid "Credit Card (powered by Stripe)"
 msgstr ""
 
 #. module: payment
@@ -751,6 +728,12 @@ msgid "Email"
 msgstr "Email"
 
 #. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.onboarding_payment_acquirer_step
+msgid "Enable credit &amp; debit card payments supported by Stripe"
+msgstr ""
+"Включить платежи по кредитным и дебетовым картам, поддерживаемые Stripe"
+
+#. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_acquirer__state__enabled
 msgid "Enabled"
 msgstr ""
@@ -762,6 +745,7 @@ msgstr "Ошибка"
 
 #. module: payment
 #. openerp-web
+#: code:addons/payment/models/payment_transaction.py:0
 #: code:addons/payment/static/src/js/payment_form_mixin.js:0
 #, python-format
 msgid "Error: %s"
@@ -948,19 +932,19 @@ msgstr "Внутренняя ошибка сервера"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form
 msgid "Invoice(s)"
-msgstr "Счет (ы)"
+msgstr "Акт(ы)"
 
 #. module: payment
 #: code:addons/payment/models/payment_transaction.py:0
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__invoice_ids
 #, python-format
 msgid "Invoices"
-msgstr "Счета"
+msgstr "Акты"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__invoices_count
 msgid "Invoices Count"
-msgstr ""
+msgstr "Количество актов"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__is_post_processed
@@ -1178,6 +1162,11 @@ msgid "Ok"
 msgstr "OK"
 
 #. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.onboarding_payment_acquirer_step
+msgid "Online Payments"
+msgstr "Онлайн-платежи"
+
+#. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_transaction__operation__online_direct
 msgid "Online direct payment"
 msgstr ""
@@ -1191,6 +1180,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:payment.selection__payment_transaction__operation__online_redirect
 msgid "Online payment with redirection"
 msgstr ""
+
+#. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.onboarding_payment_acquirer_step
+msgid "Online payments enabled"
+msgstr "Включены онлайн-платежи"
 
 #. module: payment
 #: code:addons/payment/wizards/payment_acquirer_onboarding_wizard.py:0
@@ -1345,7 +1339,6 @@ msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_acquirer_onboarding_wizard__payment_method
-#: model_terms:ir.ui.view,arch_db:payment.onboarding_payment_acquirer_step
 msgid "Payment Method"
 msgstr "Метод оплаты"
 
@@ -1415,9 +1408,9 @@ msgid "Payment acquire onboarding wizard"
 msgstr "Помощник привлечения платежного эквайера"
 
 #. module: payment
-#: model_terms:ir.ui.view,arch_db:payment.onboarding_payment_acquirer_step
-msgid "Payment method set!"
-msgstr "Установлено способ оплаты!"
+#: model:ir.model.fields,field_description:payment.field_payment_link_wizard__payment_acquirer_selection
+msgid "Payment acquirer selected"
+msgstr ""
 
 #. module: payment
 #: model:ir.model,name:payment.model_account_payment
@@ -1480,6 +1473,12 @@ msgid "Please set an amount smaller than %s."
 msgstr ""
 
 #. module: payment
+#: code:addons/payment/controllers/portal.py:0
+#, python-format
+msgid "Please switch to company '%s' to make this payment."
+msgstr ""
+
+#. module: payment
 #: model_terms:payment.acquirer,pending_msg:payment.payment_acquirer_transfer
 msgid "Please use the following transfer details"
 msgstr "Пожалуйста, используйте следующую информацию для платежа"
@@ -1515,6 +1514,12 @@ msgstr "Провайдер"
 #, python-format
 msgid "Reason:"
 msgstr "Причина:"
+
+#. module: payment
+#: code:addons/payment/models/payment_transaction.py:0
+#, python-format
+msgid "Reason: %s"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_acquirer__redirect_form_view_id
@@ -1642,11 +1647,6 @@ msgstr "Ошибка сервера"
 #, python-format
 msgid "Server error:"
 msgstr "Ошибка сервера:"
-
-#. module: payment
-#: model_terms:ir.ui.view,arch_db:payment.onboarding_payment_acquirer_step
-msgid "Set payments"
-msgstr "установите платежи"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_acquirer__show_allow_tokenization
@@ -1886,6 +1886,12 @@ msgstr ""
 #, python-format
 msgid ""
 "The payment should either be direct, with redirection, or made by a token."
+msgstr ""
+
+#. module: payment
+#: code:addons/payment/models/payment_transaction.py:0
+#, python-format
+msgid "The related payment is posted: %s"
 msgstr ""
 
 #. module: payment
@@ -2195,10 +2201,10 @@ msgid "You cannot delete a view that is used by a payment acquirer."
 msgstr ""
 
 #. module: payment
-#: code:addons/payment/wizards/payment_acquirer_onboarding_wizard.py:0
+#: code:addons/payment/controllers/portal.py:0
 #, python-format
-msgid "You have to set a journal for your payment acquirer %s."
-msgstr "Вам необходимо установить журнал для вашего эквайера платежа %s."
+msgid "You do not have access to this payment token."
+msgstr ""
 
 #. module: payment
 #. openerp-web

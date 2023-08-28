@@ -39,6 +39,7 @@ safe_attrs = clean.defs.safe_attrs | frozenset(
     ['style',
      'data-o-mail-quote',  # quote detection
      'data-oe-model', 'data-oe-id', 'data-oe-field', 'data-oe-type', 'data-oe-expression', 'data-oe-translation-id', 'data-oe-nodeid',
+     'data-last-history-steps',
      'data-publish', 'data-id', 'data-res_id', 'data-interval', 'data-member_id', 'data-scroll-background-ratio', 'data-view-id',
      'data-class', 'data-mimetype', 'data-original-src', 'data-original-id', 'data-gl-filter', 'data-quality', 'data-resize-width',
      'data-shape', 'data-shape-colors', 'data-file-name', 'data-original-mimetype',
@@ -50,8 +51,8 @@ class _Cleaner(clean.Cleaner):
     _style_re = re.compile(r'''([\w-]+)\s*:\s*((?:[^;"']|"[^";]*"|'[^';]*')+)''')
 
     _style_whitelist = [
-        'font-size', 'font-family', 'font-weight', 'background-color', 'color', 'text-align',
-        'line-height', 'letter-spacing', 'text-transform', 'text-decoration', 'opacity',
+        'font-size', 'font-family', 'font-weight', 'font-style', 'background-color', 'color', 'text-align',
+        'line-height', 'letter-spacing', 'text-transform', 'text-decoration', 'text-decoration', 'opacity',
         'float', 'vertical-align', 'display',
         'padding', 'padding-top', 'padding-left', 'padding-bottom', 'padding-right',
         'margin', 'margin-top', 'margin-left', 'margin-bottom', 'margin-right',
@@ -225,6 +226,8 @@ def html_sanitize(src, silent=True, sanitize_tags=True, sanitize_attributes=Fals
         })
 
     try:
+        src = src.replace('--!>', '-->')
+        src = re.sub(r'(<!-->|<!--->)', '<!-- -->', src)
         # some corner cases make the parser crash (such as <SCRIPT/XSS SRC=\"http://ha.ckers.org/xss.js\"></SCRIPT> in test_mail)
         cleaner = _Cleaner(**kwargs)
         cleaned = cleaner.clean_html(src)
@@ -265,7 +268,7 @@ def html_sanitize(src, silent=True, sanitize_tags=True, sanitize_attributes=Fals
 # ----------------------------------------------------------
 
 URL_REGEX = r'(\bhref=[\'"](?!mailto:|tel:|sms:)([^\'"]+)[\'"])'
-TEXT_URL_REGEX = r'https?://[a-zA-Z0-9@:%._\+~#=/-]+(?:\?\S+)?'
+TEXT_URL_REGEX = r'https?://[\w@:%.+&~#=/-]+(?:\?\S+)?'
 # retrieve inner content of the link
 HTML_TAG_URL_REGEX = URL_REGEX + r'([^<>]*>([^<>]+)<\/)?'
 
@@ -604,7 +607,7 @@ def encapsulate_email(old_email, new_email):
     e.g.
     * Old From: "Admin" <admin@gmail.com>
     * New From: notifications@odoo.com
-    * Output:   "Admin (admin@gmail.com)" <notifications@odoo.com>
+    * Output: "Admin" <notifications@odoo.com>
     """
     old_email_split = getaddresses([old_email])
     if not old_email_split or not old_email_split[0]:
@@ -614,10 +617,11 @@ def encapsulate_email(old_email, new_email):
     if not new_email_split or not new_email_split[0]:
         return
 
-    if old_email_split[0][0]:
-        name_part = '%s (%s)' % old_email_split[0]
+    old_name, old_email = old_email_split[0]
+    if old_name:
+        name_part = old_name
     else:
-        name_part = old_email_split[0][1]
+        name_part = old_email.split("@")[0]
 
     return formataddr((
         name_part,

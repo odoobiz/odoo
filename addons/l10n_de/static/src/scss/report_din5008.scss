@@ -1,16 +1,15 @@
 .din_page {
-    width: 180mm;
-    margin-left: -1rem;
     font-size: 9pt;
 
     &.header {
+        margin-left: 10px;
         table {
             width: 100%;
-            img, h3, td, tr {
+            img, h3, div.h3, td, tr {
                 padding: 0;
                 margin: 0;
             }
-            h3 {
+            h3, div.h3 {
                 color: $o-default-report-primary-color;
                 position: relative;
                 top: -10mm;
@@ -22,6 +21,8 @@
         }
     }
     &.invoice_note {
+        padding-top: 10px;
+        margin-left: 10px;
         tr {
             td {
                 vertical-align: bottom;
@@ -75,10 +76,16 @@
                     color: $o-default-report-secondary-color;
                 }
             }
+
+            tr {
+                td {
+                    vertical-align: bottom;
+                }
+            }
         }
     }
     &.footer {
-        padding-left: 5mm;
+        margin-left: 10px;
         padding-right: 10mm;
         .page_number {
             margin-top: 4.23mm;

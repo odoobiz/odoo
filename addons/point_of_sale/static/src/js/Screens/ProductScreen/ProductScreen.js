@@ -7,8 +7,7 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
     const { useListener } = require('web.custom_hooks');
     const Registries = require('point_of_sale.Registries');
     const { onChangeOrder, useBarcodeReader } = require('point_of_sale.custom_hooks');
-    const { Gui } = require('point_of_sale.Gui');
-    const { isConnectionError } = require('point_of_sale.utils');
+    const { isConnectionError, posbus } = require('point_of_sale.utils');
     const { useState, onMounted } = owl.hooks;
     const { parse } = require('web.field_utils');
 
@@ -23,6 +22,7 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
             useListener('click-pay', this._onClickPay);
             useBarcodeReader({
                 product: this._barcodeProductAction,
+                quantity: this._barcodeProductAction,
                 weight: this._barcodeProductAction,
                 price: this._barcodeProductAction,
                 client: this._barcodeClientAction,
@@ -45,9 +45,7 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
             });
         }
         mounted() {
-            if(this.env.pos.config.cash_control && this.env.pos.pos_session.state == 'opening_control') {
-                Gui.showPopup('CashOpeningPopup', {notEscapable: true});
-            }
+            posbus.trigger('start-cash-control');
             this.env.pos.on('change:selectedClient', this.render, this);
         }
         willUnmount() {
@@ -157,7 +155,7 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
             // Do not add product if options is undefined.
             if (!options) return;
             // Add the product after having the extra information.
-            this.currentOrder.add_product(product, options);
+            await this.currentOrder.add_product(product, options);
             NumberBuffer.reset();
         }
         _setNumpadMode(event) {
@@ -167,9 +165,27 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
             this.state.numpadMode = mode;
         }
         async _updateSelectedOrderline(event) {
-            if(this.state.numpadMode === 'quantity' && this.env.pos.disallowLineQuantityChange()) {
-                let order = this.env.pos.get_order();
-                let selectedLine = order.get_selected_orderline();
+            const order = this.env.pos.get_order();
+            const selectedLine = order.get_selected_orderline();
+            // This validation must not be affected by `disallowLineQuantityChange`
+            if (selectedLine && selectedLine.isTipLine() && this.state.numpadMode !== "price") {
+                /**
+                 * You can actually type numbers from your keyboard, while a popup is shown, causing
+                 * the number buffer storage to be filled up with the data typed. So we force the
+                 * clean-up of that buffer whenever we detect this illegal action.
+                 */
+                NumberBuffer.reset();
+                if (event.detail.key === "Backspace") {
+                    this._setValue("remove");
+                } else {
+                    this.showPopup("ErrorPopup", {
+                        title: this.env._t("Cannot modify a tip"),
+                        body: this.env._t("Customer tips, cannot be modified directly"),
+                    });
+                }
+            } else if (this.state.numpadMode === 'quantity' && this.env.pos.disallowLineQuantityChange()) {
+                if(!order.orderlines.length)
+                    return;
                 let lastId = order.orderlines.last().cid;
                 let currentQuantity = this.env.pos.get_order().get_selected_orderline().get_quantity();
 
@@ -182,15 +198,18 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
                 }
                 const parsedInput = event.detail.buffer && parse.float(event.detail.buffer) || 0;
                 if(lastId != selectedLine.cid)
-                    this._showDecreaseQuantityPopup();
+                    await this._showDecreaseQuantityPopup();
                 else if(currentQuantity < parsedInput)
                     this._setValue(event.detail.buffer);
                 else if(parsedInput < currentQuantity)
-                    this._showDecreaseQuantityPopup();
+                    await this._showDecreaseQuantityPopup();
             } else {
                 let { buffer } = event.detail;
                 let val = buffer === null ? 'remove' : buffer;
                 this._setValue(val);
+            }
+            if (this.env.pos.config.iface_customer_facing_display) {
+                this.env.pos.send_current_order_to_customer_facing_display();
             }
         }
         async _newOrderlineSelected() {
@@ -209,9 +228,6 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
                     selected_orderline.price_manually_set = true;
                     selected_orderline.set_unit_price(val);
                 }
-                if (this.env.pos.config.iface_customer_facing_display) {
-                    this.env.pos.send_current_order_to_customer_facing_display();
-                }
             }
         }
         async _barcodeProductAction(code) {
@@ -223,7 +239,11 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
                     foundProductIds = await this.rpc({
                         model: 'product.product',
                         method: 'search',
-                        args: [[['barcode', '=', code.base_code]]],
+                        args: [[
+                            ['barcode', '=', code.base_code],
+                            ['sale_ok', '=', true],
+                            ['available_in_pos', '=', true]
+                        ]],
                         context: this.env.session.user_context,
                     });
                 } catch (error) {
@@ -237,7 +257,7 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
                     }
                 }
                 if (foundProductIds.length) {
-                    await this.env.pos._addProducts(foundProductIds);
+                    await this.env.pos._addProducts(foundProductIds, false);
                     // assume that the result is unique.
                     product = this.env.pos.db.get_product_by_id(foundProductIds[0]);
                 } else {
@@ -257,7 +277,7 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
                         price_manually_set: true,
                     },
                 });
-            } else if (code.type === 'weight') {
+            } else if (code.type === 'weight' || code.type === 'quantity') {
                 Object.assign(options, {
                     quantity: code.value,
                     merge: false,
@@ -268,18 +288,14 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
                     merge: false,
                 });
             }
-            this.currentOrder.add_product(product,  options)
+            await this.currentOrder.add_product(product,  options);
         }
         _barcodeClientAction(code) {
             const partner = this.env.pos.db.get_partner_by_barcode(code.code);
             if (partner) {
                 if (this.currentOrder.get_client() !== partner) {
                     this.currentOrder.set_client(partner);
-                    this.currentOrder.set_pricelist(
-                        _.findWhere(this.env.pos.pricelists, {
-                            id: partner.property_product_pricelist[0],
-                        }) || this.env.pos.default_pricelist
-                    );
+                    this.currentOrder.updatePricelist(partner);
                 }
                 return true;
             }
@@ -320,7 +336,7 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
                 startingValue: 0,
                 title: this.env._t('Set the new quantity'),
             });
-            let newQuantity = inputNumber !== "" ? parse.float(inputNumber) : null;
+            let newQuantity = inputNumber && inputNumber !== "" ? parse.float(inputNumber) : null;
             if (confirmed && newQuantity !== null) {
                 let order = this.env.pos.get_order();
                 let selectedLine = this.env.pos.get_order().get_selected_orderline();
@@ -363,8 +379,20 @@ odoo.define('point_of_sale.ProductScreen', function(require) {
                 this.currentOrder.updatePricelist(newClient);
             }
         }
-        _onClickPay() {
-            this.showScreen('PaymentScreen');
+        async _onClickPay() {
+            if (this.env.pos.get_order().orderlines.any(line => line.get_product().tracking !== 'none' && !line.has_valid_product_lot() && (this.env.pos.picking_type.use_create_lots || this.env.pos.picking_type.use_existing_lots))) {
+                const { confirmed } = await this.showPopup('ConfirmPopup', {
+                    title: this.env._t('Some Serial/Lot Numbers are missing'),
+                    body: this.env._t('You are trying to sell products with serial/lot numbers, but some of them are not set.\nWould you like to proceed anyway?'),
+                    confirmText: this.env._t('Yes'),
+                    cancelText: this.env._t('No')
+                });
+                if (confirmed) {
+                    this.showScreen('PaymentScreen');
+                }
+            } else {
+                this.showScreen('PaymentScreen');
+            }
         }
         switchPane() {
             this.state.mobile_pane = this.state.mobile_pane === "left" ? "right" : "left";

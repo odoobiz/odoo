@@ -157,8 +157,9 @@ class MailThread(models.AbstractModel):
             'default_res_model': self._name,
             'default_composition_mode': 'mass',
             'default_template_id': template.id if template else False,
-            'default_body': body if body and not template else False,
         }
+        if body and not template:
+            composer_context['default_body'] = body
         if active_domain is not None:
             composer_context['default_use_active_domain'] = True
             composer_context['default_active_domain'] = repr(active_domain)
@@ -234,8 +235,8 @@ class MailThread(models.AbstractModel):
             **kwargs
         )
 
-    def _notify_thread(self, message, msg_vals=False, **kwargs):
-        recipients_data = super(MailThread, self)._notify_thread(message, msg_vals=msg_vals, **kwargs)
+    def _notify_thread(self, message, msg_vals=False, notify_by_email=True, **kwargs):
+        recipients_data = super(MailThread, self)._notify_thread(message, msg_vals=msg_vals, notify_by_email=notify_by_email, **kwargs)
         self._notify_record_by_sms(message, recipients_data, msg_vals=msg_vals, **kwargs)
         return recipients_data
 

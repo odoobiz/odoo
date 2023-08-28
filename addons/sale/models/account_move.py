@@ -74,16 +74,11 @@ class AccountMove(models.Model):
     def action_post(self):
         #inherit of the function from account.move to validate a new tax and the priceunit of a downpayment
         res = super(AccountMove, self).action_post()
-        line_ids = self.mapped('line_ids').filtered(lambda line: line.sale_line_ids.is_downpayment)
+        line_ids = self.mapped('line_ids').filtered(lambda line: any(line.sale_line_ids.mapped('is_downpayment')))
         for line in line_ids:
             try:
                 line.sale_line_ids.tax_id = line.tax_ids
-                if all(line.tax_ids.mapped('price_include')):
-                    line.sale_line_ids.price_unit = line.price_unit
-                else:
-                    #To keep positive amount on the sale order and to have the right price for the invoice
-                    #We need the - before our untaxed_amount_to_invoice
-                    line.sale_line_ids.price_unit = -line.sale_line_ids.untaxed_amount_to_invoice
+                line.sale_line_ids.price_unit = line.price_unit
             except UserError:
                 # a UserError here means the SO was locked, which prevents changing the taxes
                 # just ignore the error - this is a nice to have feature and should not be blocking
@@ -97,7 +92,7 @@ class AccountMove(models.Model):
         posted = super()._post(soft)
 
         for invoice in posted.filtered(lambda move: move.is_invoice()):
-            payments = invoice.mapped('transaction_ids.payment_id')
+            payments = invoice.mapped('transaction_ids.payment_id').filtered(lambda x: x.state == 'posted')
             move_lines = payments.line_ids.filtered(lambda line: line.account_internal_type in ('receivable', 'payable') and not line.reconciled)
             for line in move_lines:
                 invoice.js_assign_outstanding_line(line.id)
@@ -119,3 +114,19 @@ class AccountMove(models.Model):
         # OVERRIDE
         self.ensure_one()
         return self.partner_shipping_id.id or super(AccountMove, self)._get_invoice_delivery_partner_id()
+
+    def _action_invoice_ready_to_be_sent(self):
+        # OVERRIDE
+        # Make sure the send invoice CRON is called when an invoice becomes ready to be sent by mail.
+        res = super()._action_invoice_ready_to_be_sent()
+
+        send_invoice_cron = self.env.ref('sale.send_invoice_cron', raise_if_not_found=False)
+        if send_invoice_cron:
+            send_invoice_cron._trigger()
+
+        return res
+
+    def _is_downpayment(self):
+        # OVERRIDE
+        self.ensure_one()
+        return self.line_ids.sale_line_ids and all(sale_line.is_downpayment for sale_line in self.line_ids.sale_line_ids) or False

@@ -491,6 +491,8 @@ class TestSaleTimesheet(TestCommonSaleTimesheet):
         wizard.create_invoices()
 
         self.assertTrue(sale_order.invoice_ids, 'One invoice should be created because the timesheet logged is between the period defined in wizard')
+        self.assertTrue(all(line.invoice_status == "to invoice" for line in sale_order.order_line if line.qty_delivered != line.qty_invoiced),
+                        "All lines that still have some quantity to be invoiced should have an invoice status of 'to invoice', regardless if they were considered for previous invoicing, but didn't belong to the timesheet domain")
 
         invoice = sale_order.invoice_ids[0]
         self.assertEqual(so_line_deliver_global_project.qty_invoiced, timesheet1.unit_amount)
@@ -733,3 +735,36 @@ class TestSaleTimesheet(TestCommonSaleTimesheet):
             ('res_id', '=', sale_order.id),
         ])
         self.assertEqual(len(message_sent), 1, 'Sale Timesheet: An email should only be sent to the saleperson when the state of the sale order change to upselling')
+
+    def test_unlink_timesheet(self):
+        sale_order = self.env['sale.order'].create({
+            'partner_id': self.partner_a.id,
+            'partner_invoice_id': self.partner_a.id,
+            'partner_shipping_id': self.partner_a.id,
+            'pricelist_id': self.company_data['default_pricelist'].id,
+        })
+        so_line = self.env['sale.order.line'].create({
+            'name': self.product_delivery_timesheet2.name,
+            'product_id': self.product_delivery_timesheet2.id,
+            'product_uom_qty': 50,
+            'product_uom': self.product_delivery_timesheet2.uom_id.id,
+            'price_unit': self.product_delivery_timesheet2.list_price,
+            'order_id': sale_order.id,
+        })
+        sale_order.action_confirm()
+        task = so_line.task_id
+
+        # let's log some timesheets
+        analytic_line = self.env['account.analytic.line'].create({
+            'name': 'Test Line',
+            'project_id': task.project_id.id,
+            'task_id': task.id,
+            'unit_amount': 50,
+            'employee_id': self.employee_manager.id,
+        })
+
+        move = sale_order._create_invoices()
+        self.assertEqual(analytic_line.timesheet_invoice_id, move, "The timesheet should be linked to move")
+
+        move.with_context(check_move_validity=False).line_ids[0].unlink()
+        self.assertFalse(analytic_line.timesheet_invoice_id,"The timesheet should have been unlinked from move")

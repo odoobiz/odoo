@@ -7,17 +7,19 @@
 # Anders Wallenquist <anders.wallenquist@vertel.se>, 2021
 # Leif Persson <leifpz54@gmail.com>, 2021
 # Chrille Hedberg <hedberg.chrille@gmail.com>, 2021
-# Simon S, 2021
 # Kim Asplund <kim.asplund@gmail.com>, 2021
+# emavertel, 2022
+# Simon S, 2022
+# Lasse L, 2023
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.5\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 10:29+0000\n"
+"POT-Creation-Date: 2022-01-24 08:20+0000\n"
 "PO-Revision-Date: 2021-09-14 12:24+0000\n"
-"Last-Translator: Kim Asplund <kim.asplund@gmail.com>, 2021\n"
-"Language-Team: Swedish (https://www.transifex.com/odoo/teams/41243/sv/)\n"
+"Last-Translator: Lasse L, 2023\n"
+"Language-Team: Swedish (https://app.transifex.com/odoo/teams/41243/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -98,7 +100,7 @@ msgstr ""
 #. module: mrp_subcontracting
 #: model:ir.model.fields.selection,name:mrp_subcontracting.selection__stock_picking__display_action_record_components__hide
 msgid "Hide"
-msgstr ""
+msgstr "Dölj"
 
 #. module: mrp_subcontracting
 #: model:ir.model.fields,field_description:mrp_subcontracting.field_stock_quant__is_subcontract
@@ -109,20 +111,20 @@ msgstr ""
 #: code:addons/mrp_subcontracting/models/stock_warehouse.py:0
 #, python-format
 msgid "Make To Order"
-msgstr ""
+msgstr "Tillverka efter beställning"
 
 #. module: mrp_subcontracting
-#: model:ir.model.fields.selection,name:mrp_subcontracting.selection__stock_picking__display_action_record_components__mandatory
-msgid "Mandatory"
-msgstr ""
-
-#. module: stock
 #: code:addons/mrp_subcontracting/models/stock_move_line.py:0
 #, python-format
 msgid ""
 "Make sure you validate or adapt the related resupply picking to your "
 "subcontractor in order to avoid inconsistencies in your stock."
 msgstr ""
+
+#. module: mrp_subcontracting
+#: model:ir.model.fields.selection,name:mrp_subcontracting.selection__stock_picking__display_action_record_components__mandatory
+msgid "Mandatory"
+msgstr "Obligatoriskt"
 
 #. module: mrp_subcontracting
 #: code:addons/mrp_subcontracting/models/stock_picking.py:0
@@ -134,12 +136,17 @@ msgstr ""
 #: code:addons/mrp_subcontracting/models/stock_quant.py:0
 #, python-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Åtgärd stöds inte"
 
 #. module: mrp_subcontracting
 #: model:ir.model,name:mrp_subcontracting.model_product_product
 msgid "Product"
 msgstr "Produkt"
+
+#. module: mrp_subcontracting
+#: model:ir.model,name:mrp_subcontracting.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Produktflyttar (lagerflyttsrad)"
 
 #. module: mrp_subcontracting
 #: model:ir.model,name:mrp_subcontracting.model_mrp_production
@@ -175,7 +182,7 @@ msgstr ""
 #. module: mrp_subcontracting
 #: model_terms:ir.ui.view,arch_db:mrp_subcontracting.mrp_subcontracting_move_tree_view
 msgid "Reserved"
-msgstr ""
+msgstr "Reserverad"
 
 #. module: mrp_subcontracting
 #: code:addons/mrp_subcontracting/models/stock_warehouse.py:0
@@ -205,7 +212,7 @@ msgstr ""
 #. module: mrp_subcontracting
 #: model:ir.model,name:mrp_subcontracting.model_stock_return_picking
 msgid "Return Picking"
-msgstr ""
+msgstr "Plockning av returer"
 
 #. module: mrp_subcontracting
 #: code:addons/mrp_subcontracting/models/stock_warehouse.py:0
@@ -316,7 +323,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mrp_subcontracting.field_mrp_bom__subcontractor_ids
 #: model_terms:ir.ui.view,arch_db:mrp_subcontracting.view_partner_mrp_subcontracting_filter
 msgid "Subcontractors"
-msgstr ""
+msgstr "Underleverantörer"
 
 #. module: mrp_subcontracting
 #: model:ir.model,name:mrp_subcontracting.model_product_supplierinfo
@@ -388,4 +395,12 @@ msgstr ""
 #: code:addons/mrp_subcontracting/models/mrp_production.py:0
 #, python-format
 msgid "You must enter a serial number for each line of %s"
+msgstr ""
+
+#. module: mrp_subcontracting
+#: code:addons/mrp_subcontracting/models/mrp_production.py:0
+#, python-format
+msgid ""
+"You must indicate a non-zero amount consumed for at least one of your "
+"components"
 msgstr ""

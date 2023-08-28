@@ -7,7 +7,7 @@ import json
 from psycopg2 import IntegrityError
 from werkzeug.exceptions import BadRequest
 
-from odoo import http, SUPERUSER_ID, _
+from odoo import http, SUPERUSER_ID, _, _lt
 from odoo.http import request
 from odoo.tools import plaintext2html
 from odoo.exceptions import ValidationError, UserError
@@ -16,7 +16,7 @@ from odoo.addons.base.models.ir_qweb_fields import nl2br
 
 class WebsiteForm(http.Controller):
 
-    @http.route('/website/form/', type='http', auth="public", methods=['POST'], multilang=False)
+    @http.route('/website/form', type='http', auth="public", methods=['POST'], multilang=False)
     def website_form_empty(self, **kwargs):
         # This is a workaround to don't add language prefix to <form action="/website/form/" ...>
         return ""
@@ -84,7 +84,7 @@ class WebsiteForm(http.Controller):
 
     # Constants string to make metadata readable on a text field
 
-    _meta_label = "%s\n________\n\n" % _("Metadata")  # Title for meta data
+    _meta_label = _lt("Metadata")  # Title for meta data
 
     # Dict of dynamically called filters following type of field to be fault tolerent
 
@@ -141,7 +141,7 @@ class WebsiteForm(http.Controller):
             'meta': '',         # Add metadata if enabled
         }
 
-        authorized_fields = model.sudo()._get_form_writable_fields()
+        authorized_fields = model.with_user(SUPERUSER_ID)._get_form_writable_fields()
         error_fields = []
         custom_fields = []
 
@@ -169,6 +169,15 @@ class WebsiteForm(http.Controller):
                     data['record'][field_name] = input_filter(self, field_name, field_value)
                 except ValueError:
                     error_fields.append(field_name)
+
+                if dest_model._name == 'mail.mail' and field_name == 'email_from':
+                    # As the "email_from" is used to populate the email_from of the
+                    # sent mail.mail, it could be filtered out at sending time if no
+                    # outgoing mail server "from_filter" match the sender email.
+                    # To make sure the email contains that (important) information
+                    # we also add it to the "custom message" that will be included
+                    # in the body of the email sent.
+                    custom_fields.append((_('email'), field_value))
 
             # If it's a custom field
             elif field_name != 'context':
@@ -205,7 +214,10 @@ class WebsiteForm(http.Controller):
         model_name = model.sudo().model
         if model_name == 'mail.mail':
             values.update({'reply_to': values.get('email_from')})
-        record = request.env[model_name].with_user(SUPERUSER_ID).with_context(mail_create_nosubscribe=True).create(values)
+        record = request.env[model_name].with_user(SUPERUSER_ID).with_context(
+            mail_create_nosubscribe=True,
+            commit_assetsbundle=False,
+        ).create(values)
 
         if custom or meta:
             _custom_label = "%s\n___________\n\n" % _("Other Information:")  # Title for custom fields
@@ -215,7 +227,7 @@ class WebsiteForm(http.Controller):
             default_field_data = values.get(default_field.name, '')
             custom_content = (default_field_data + "\n\n" if default_field_data else '') \
                            + (_custom_label + custom + "\n\n" if custom else '') \
-                           + (self._meta_label + meta if meta else '')
+                           + (self._meta_label + "\n________\n\n" + meta if meta else '')
 
             # If there is a default field configured for this model, use it.
             # If there isn't, put the custom data in a message instead
@@ -239,7 +251,7 @@ class WebsiteForm(http.Controller):
         orphan_attachment_ids = []
         model_name = model.sudo().model
         record = model.env[model_name].browse(id_record)
-        authorized_fields = model.sudo()._get_form_writable_fields()
+        authorized_fields = model.with_user(SUPERUSER_ID)._get_form_writable_fields()
         for file in files:
             custom_field = file.field_name not in authorized_fields
             attachment_value = {
@@ -250,7 +262,11 @@ class WebsiteForm(http.Controller):
             }
             attachment_id = request.env['ir.attachment'].sudo().create(attachment_value)
             if attachment_id and not custom_field:
-                record.sudo()[file.field_name] = [(4, attachment_id.id)]
+                record_sudo = record.sudo()
+                value = [(4, attachment_id.id)]
+                if record_sudo._fields[file.field_name].type == 'many2one':
+                    value = attachment_id.id
+                record_sudo[file.field_name] = value
             else:
                 orphan_attachment_ids.append(attachment_id.id)
 

@@ -4,20 +4,21 @@
 # 
 # Translators:
 # Martin Trigaux, 2021
+# Diego Sayron, 2023
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.5\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 10:28+0000\n"
+"POT-Creation-Date: 2022-01-24 08:19+0000\n"
 "PO-Revision-Date: 2021-09-14 12:22+0000\n"
-"Last-Translator: Martin Trigaux, 2021\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/odoo/teams/41243/pt_BR/)\n"
+"Last-Translator: Diego Sayron, 2023\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/odoo/teams/41243/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. module: hr_fleet
 #: code:addons/hr_fleet/controllers/main.py:0
@@ -45,6 +46,7 @@ msgstr "Anexos"
 #, python-format
 msgid "Cannot remove address from employees with linked cars."
 msgstr ""
+"Não é possível remover endereço de funcionários com carros vinculados."
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_employee__employee_cars_count
@@ -146,7 +148,7 @@ msgstr "Empregado Público"
 #: code:addons/hr_fleet/models/fleet_vehicle.py:0
 #, python-format
 msgid "Related Employee"
-msgstr ""
+msgstr "Funcionário Relacionado"
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_departure_wizard__release_campany_car
@@ -162,6 +164,12 @@ msgstr ""
 #: model:ir.model,name:hr_fleet.model_fleet_vehicle_log_services
 msgid "Services for vehicles"
 msgstr "Serviços para veículos"
+
+#. module: hr_fleet
+#: code:addons/hr_fleet/controllers/main.py:0
+#, python-format
+msgid "There is no pdf attached to generate a claim report."
+msgstr ""
 
 #. module: hr_fleet
 #: model_terms:ir.ui.view,arch_db:hr_fleet.res_users_view_form_preferences
@@ -186,7 +194,7 @@ msgstr "Veículo"
 #. module: hr_fleet
 #: model:ir.model,name:hr_fleet.model_fleet_vehicle_log_contract
 msgid "Vehicle Contract"
-msgstr ""
+msgstr "Contrato de veículo"
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_employee__car_ids

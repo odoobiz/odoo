@@ -170,7 +170,11 @@ class Warehouse(models.Model):
 
         # If another partner assigned
         if vals.get('partner_id'):
-            warehouses._update_partner_data(vals['partner_id'], vals.get('company_id'))
+            if vals.get('company_id'):
+                warehouses._update_partner_data(vals['partner_id'], vals.get('company_id'))
+            else:
+                for warehouse in self:
+                    warehouse._update_partner_data(vals['partner_id'], warehouse.company_id.id)
 
         res = super(Warehouse, self).write(vals)
 
@@ -391,6 +395,7 @@ class Warehouse(models.Model):
                     'company_id': self.company_id.id,
                     'action': 'pull',
                     'auto': 'manual',
+                    'propagate_carrier': True,
                     'route_id': self._find_global_route('stock.route_warehouse0_mto', _('Make To Order')).id
                 },
                 'update_values': {

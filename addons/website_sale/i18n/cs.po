@@ -3,25 +3,26 @@
 # 	* website_sale
 # 
 # Translators:
-# Chris <krystof.reklamy13@gmail.com>, 2021
+# Chris, 2021
 # Ladislav Tomm <tomm@helemik.cz>, 2021
 # Jan Horzinka <jan.horzinka@centrum.cz>, 2021
 # Damian Brencic <brencicdamian12313@gmail.com>, 2021
 # Martin Trigaux, 2021
 # Jaroslav Helemik Nemec <nemec@helemik.cz>, 2021
-# Michal Veselý <michal@veselyberanek.net>, 2021
 # Rastislav Brencic <rastislav.brencic@azet.sk>, 2021
 # karolína schusterová <karolina.schusterova@vdp.sk>, 2021
-# trendspotter <jirka.p@volny.cz>, 2021
+# Michal Veselý <michal@veselyberanek.net>, 2021
+# Jiří Podhorecký, 2022
+# Aleš Fiala <f.ales1@seznam.cz>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 10:53+0000\n"
+"POT-Creation-Date: 2022-07-26 11:51+0000\n"
 "PO-Revision-Date: 2021-09-14 12:28+0000\n"
-"Last-Translator: trendspotter <jirka.p@volny.cz>, 2021\n"
-"Language-Team: Czech (https://www.transifex.com/odoo/teams/41243/cs/)\n"
+"Last-Translator: Aleš Fiala <f.ales1@seznam.cz>, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -301,15 +302,14 @@ msgstr "<span class=\"o_form_label\">Fakturační politika</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.extra_info
-msgid "<span class=\"s_website_form_label_content\">A document to provide</span>"
-msgstr ""
-"<span class=\"s_website_form_label_content\">Dokument, k poskytnutí</span>"
-
-#. module: website_sale
-#: model_terms:ir.ui.view,arch_db:website_sale.extra_info
 msgid "<span class=\"s_website_form_label_content\">Give us your feedback</span>"
 msgstr ""
 "<span class=\"s_website_form_label_content\">Dejte nám zpětnou vazbu</span>"
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.extra_info
+msgid "<span class=\"s_website_form_label_content\">Upload a document</span>"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.extra_info
@@ -355,6 +355,13 @@ msgstr "<span>Objednávka</span>"
 #: model_terms:ir.ui.view,arch_db:website_sale.short_cart_summary
 msgid "<span>Process Checkout</span>"
 msgstr "<span>K pokladně</span>"
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.payment_confirmation_status
+msgid ""
+"<span>Unfortunately your order can not be confirmed as the amount of your payment does not match the amount of your cart.\n"
+"                        Please contact the responsible of the shop for more information.</span>"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_product_image_form
@@ -573,6 +580,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
 msgid "Acceptable file size"
 msgstr "Přijatelná velikost souboru"
+
+#. module: website_sale
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_cross_selling_accessories
+msgid "Accessories for Product"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__accessory_product_ids
@@ -904,6 +916,12 @@ msgstr ""
 " dotykové obrazovky."
 
 #. module: website_sale
+#: code:addons/website_sale/models/product_template.py:0
+#, python-format
+msgid "Categories:"
+msgstr ""
+
+#. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_searchbar_input_snippet_options
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_template_options
 msgid "Category"
@@ -917,8 +935,8 @@ msgstr "Popis kategorie"
 #. module: website_sale
 #: code:addons/website_sale/models/product_template.py:0
 #, python-format
-msgid "Category: %s"
-msgstr "Kategorie: %s"
+msgid "Category:"
+msgstr "Kategorie:"
 
 #. module: website_sale
 #: code:addons/website_sale/models/website_snippet_filter.py:0
@@ -953,6 +971,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__child_id
 msgid "Children Categories"
 msgstr "Podřízené kategorie"
+
+#. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
+msgid ""
+"Changing your name is not allowed once invoices have been issued for your "
+"account. Please contact us directly for this operation."
+msgstr ""
+"Změna jména není povolena po vystavení faktur pro váš účet. Kontaktujte nás "
+"prosím přímo pro tuto operaci."
 
 #. module: website_sale
 #: model:ir.actions.act_window,name:website_sale.action_open_website_sale_onboarding_payment_acquirer_wizard
@@ -1056,6 +1084,7 @@ msgid "Config Settings"
 msgstr "Nastavení konfigurace"
 
 #. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.payment
 #: model_terms:ir.ui.view,arch_db:website_sale.wizard_checkout
 msgid "Confirm Order"
 msgstr "Potvrdit objednávku"
@@ -1169,8 +1198,8 @@ msgstr "Zákazníci"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
-msgid "DHL"
-msgstr "DHL"
+msgid "DHL Express Connector"
+msgstr "DHL Express konektor"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__currency_id
@@ -1590,6 +1619,15 @@ msgstr "Název obrázku"
 #. module: website_sale
 #: code:addons/website_sale/controllers/main.py:0
 #, python-format
+msgid ""
+"If you are ordering for an external person, please place your order via the "
+"backend. If you wish to change your name or email address, please do so in "
+"the account settings or contact your administrator."
+msgstr ""
+
+#. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
 msgid "Invalid Email! Please enter a valid email address."
 msgstr "Neplatný e-mail! Prosím zadejte platnou emailovou adresu."
 
@@ -1775,7 +1813,7 @@ msgstr "Médium"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website_sale_payment_acquirer_onboarding_wizard__paypal_seller_account
 msgid "Merchant Account ID"
-msgstr ""
+msgstr "ID účtu obchodníka"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website_sale_payment_acquirer_onboarding_wizard__manual_name
@@ -1800,6 +1838,7 @@ msgstr "Můj košík"
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__name
 #: model:ir.model.fields,field_description:website_sale.field_website_base_unit__name
 #: model_terms:ir.ui.view,arch_db:website_sale.address
+#: model_terms:ir.ui.view,arch_db:website_sale.product_ribbon_view_tree
 #: model_terms:ir.ui.view,arch_db:website_sale.sort
 msgid "Name"
 msgstr "Jméno"
@@ -1824,6 +1863,7 @@ msgstr "Novinka!"
 
 #. module: website_sale
 #: model:ir.filters,name:website_sale.dynamic_snippet_newest_products_filter
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_newest_products
 msgid "Newest Products"
 msgstr ""
 
@@ -1875,7 +1915,7 @@ msgstr "Žádné výsledky pro “"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "No results found for '"
-msgstr ""
+msgstr "Nenašly se výsledky pro '"
 
 #. module: website_sale
 #. openerp-web
@@ -2107,6 +2147,11 @@ msgstr "Nadřazená cesta"
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__parents_and_self
 msgid "Parents And Self"
 msgstr ""
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.payment
+msgid "Pay Now"
+msgstr "Zaplať nyní"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment
@@ -2405,6 +2450,11 @@ msgid "Products Recently Sold With"
 msgstr ""
 
 #. module: website_sale
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_cross_selling_recently_sold_with
+msgid "Products Recently Sold With Product"
+msgstr ""
+
+#. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website_visitor__product_count
 msgid "Products Views"
 msgstr "Zobrazení produktů"
@@ -2514,11 +2564,13 @@ msgstr "Důvod hodnocení"
 
 #. module: website_sale
 #: model:ir.actions.server,name:website_sale.dynamic_snippet_latest_sold_products_action
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_latest_sold_products
 msgid "Recently Sold Products"
 msgstr ""
 
 #. module: website_sale
 #: model:ir.actions.server,name:website_sale.dynamic_snippet_latest_viewed_products_action
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_latest_viewed_products
 msgid "Recently Viewed Products"
 msgstr "Nedávno zobrazené produkty"
 
@@ -3018,6 +3070,18 @@ msgid "The #1"
 msgstr "Číslo 1"
 
 #. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
+msgid "The access token is invalid."
+msgstr "Přístupový token je neplatný."
+
+#. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
+msgid "The cart has been updated. Please refresh the page."
+msgstr ""
+
+#. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__website_url
 #: model:ir.model.fields,help:website_sale.field_product_template__website_url
 msgid "The full URL to access the document through the website."
@@ -3044,6 +3108,12 @@ msgid ""
 msgstr ""
 "Zde zvolený režim platí jako fakturační politika pro každý nový vytvořený "
 "produkt, ale nikoli pro již existující produkty."
+
+#. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
+msgid "The order has been canceled."
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__public_categ_ids
@@ -3425,7 +3495,7 @@ msgstr "Webstránky používající tým obchodníků"
 #: code:addons/website_sale/models/website_snippet_filter.py:0
 #, python-format
 msgid "Whiteboard"
-msgstr ""
+msgstr "Bílá tabule"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__module_website_sale_wishlist

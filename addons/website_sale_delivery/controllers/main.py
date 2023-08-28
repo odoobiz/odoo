@@ -13,10 +13,13 @@ class WebsiteSaleDelivery(WebsiteSale):
     def shop_payment(self, **post):
         order = request.website.sale_get_order()
         carrier_id = post.get('carrier_id')
+        keep_carrier = post.get('keep_carrier', False)
+        if keep_carrier:
+            keep_carrier = bool(int(keep_carrier))
         if carrier_id:
             carrier_id = int(carrier_id)
         if order:
-            order._check_carrier_quotation(force_carrier_id=carrier_id)
+            order.with_context(keep_carrier=keep_carrier)._check_carrier_quotation(force_carrier_id=carrier_id)
             if carrier_id:
                 return request.redirect("/shop/payment")
 
@@ -26,7 +29,9 @@ class WebsiteSaleDelivery(WebsiteSale):
     def update_eshop_carrier(self, **post):
         order = request.website.sale_get_order()
         carrier_id = int(post['carrier_id'])
-        if order:
+        if order and carrier_id != order.carrier_id.id:
+            if any(tx.state not in ("cancel", "error", "draft") for tx in order.transaction_ids):
+                raise UserError(_('It seems that there is already a transaction for your order, you can not change the delivery method anymore'))
             order._check_carrier_quotation(force_carrier_id=carrier_id)
         return self._update_website_sale_delivery_return(order, **post)
 
@@ -117,5 +122,6 @@ class WebsiteSaleDelivery(WebsiteSale):
                 'new_amount_untaxed': Monetary.value_to_html(order.amount_untaxed, {'display_currency': currency}),
                 'new_amount_tax': Monetary.value_to_html(order.amount_tax, {'display_currency': currency}),
                 'new_amount_total': Monetary.value_to_html(order.amount_total, {'display_currency': currency}),
+                'new_amount_total_raw': order.amount_total,
             }
         return {}

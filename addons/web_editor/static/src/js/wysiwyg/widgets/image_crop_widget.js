@@ -4,6 +4,7 @@ odoo.define('wysiwyg.widgets.ImageCropWidget', function (require) {
 const core = require('web.core');
 const Widget = require('web.Widget');
 const {applyModifications, cropperDataFields, activateCropper, loadImage, loadImageInfo} = require('web_editor.image_processing');
+const { Markup } = require('web.utils');
 
 const _t = core._t;
 
@@ -45,7 +46,8 @@ const ImageCropWidget = Widget.extend({
     async willStart() {
         await this._super.apply(this, arguments);
         await loadImageInfo(this.media, this._rpc.bind(this));
-        if (this.media.dataset.originalSrc) {
+        const isIllustration = /^\/web_editor\/shape\/illustration\//.test(this.media.dataset.originalSrc);
+        if (this.media.dataset.originalSrc && !isIllustration) {
             this.originalSrc = this.media.dataset.originalSrc;
             this.originalId = this.media.dataset.originalId;
             return;
@@ -61,7 +63,7 @@ const ImageCropWidget = Widget.extend({
             this.displayNotification({
               type: 'warning',
               title: _t("This image is an external image"),
-              message: _t("This type of image is not supported for cropping.<br/>If you want to crop it, please first download it from the original source and upload it in Odoo."),
+              message: Markup(_t("This type of image is not supported for cropping.<br/>If you want to crop it, please first download it from the original source and upload it in Odoo.")),
             });
             return this.destroy();
         }

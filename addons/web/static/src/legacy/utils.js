@@ -141,6 +141,14 @@ export function mapLegacyEnvToWowlEnv(legacyEnv, wowlEnv) {
         let rejection;
         const prom = new Promise((resolve, reject) => {
             const [route, params, settings = {}] = args;
+            // Add user context in kwargs if there are kwargs
+            if (params && params.kwargs) {
+                params.kwargs.context = Object.assign(
+                    {},
+                    legacyEnv.session.user_context,
+                    params.kwargs.context,
+                );
+            }
             const jsonrpc = wowlEnv.services.rpc(route, params, {
                 silent: settings.shadow,
                 xhr: settings.xhr,
@@ -174,6 +182,10 @@ export function mapLegacyEnvToWowlEnv(legacyEnv, wowlEnv) {
     // map WebClientReady
     wowlEnv.bus.on("WEB_CLIENT_READY", null, () => {
         legacyEnv.bus.trigger("web_client_ready");
+    });
+
+    wowlEnv.bus.on("SCROLLER:ANCHOR_LINK_CLICKED", null, (payload) => {
+        legacyEnv.bus.trigger("SCROLLER:ANCHOR_LINK_CLICKED", payload);
     });
 
     legacyEnv.bus.on("clear_cache", null, () => {

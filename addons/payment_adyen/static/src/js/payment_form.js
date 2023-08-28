@@ -23,7 +23,6 @@ odoo.define('payment_adyen.payment_form', require => {
          * @return {Promise}
          */
         _dropinOnAdditionalDetails: function (state, dropin) {
-            this._hideInputs(); // Only the inputs of the inline form should be used
             return this._rpc({
                 route: '/payment/adyen/payment_details',
                 params: {
@@ -92,6 +91,8 @@ odoo.define('payment_adyen.payment_form', require => {
                 });
             }).then(paymentResponse => {
                 if (paymentResponse.action) { // Additional action required from the shopper
+                    this._hideInputs(); // Only the inputs of the inline form should be used
+                    $('body').unblock(); // The page is blocked at this point, unblock it
                     dropin.handleAction(paymentResponse.action);
                 } else { // The payment reached a final state, redirect to the status page
                     window.location = '/payment/status';
@@ -172,7 +173,36 @@ odoo.define('payment_adyen.payment_form', require => {
                             showPaymentMethods: true,
                             showPayButton: false,
                             setStatusAutomatically: true,
-                        },
+                            onSelect: component => {
+                                if (component.props.name === "PayPal") {
+                                    if (!this.paypalForm) {
+                                        // create div element to render PayPal component
+                                        this.paypalForm = document.createElement("div");
+                                        document.getElementById(
+                                            `o_adyen_dropin_container_${paymentOptionId}`
+                                        ).appendChild(this.paypalForm);
+                                        this.paypalForm.classList.add("mt-2");
+                                        // create and mount PayPal button in the component
+                                        checkout.create("paypal",
+                                            {
+                                                style: {
+                                                    disableMaxWidth: true
+                                                },
+                                                blockPayPalCreditButton: true,
+                                                blockPayPalPayLaterButton: true
+                                            }
+                                        ).mount(this.paypalForm).acquirerId = paymentOptionId;
+                                        this.txContext.tokenizationRequested = false;
+                                    }
+                                    // Hide Pay button and show PayPal component
+                                    this._hideInputs();
+                                    this.paypalForm.classList.remove('d-none');
+                                } else if (this.paypalForm) {
+                                    this.paypalForm.classList.add('d-none');
+                                    this._showInputs();
+                                }
+                            },
+                        }
                     ).mount(`#o_adyen_dropin_container_${paymentOptionId}`);
                     this.adyenDropin.acquirerId = paymentOptionId;
                 });
@@ -196,7 +226,7 @@ odoo.define('payment_adyen.payment_form', require => {
          * @param {string} flow - The online payment flow of the transaction
          * @return {Promise}
          */
-        _processPayment: function (provider, paymentOptionId, flow) {
+        async _processPayment(provider, paymentOptionId, flow) {
             if (provider !== 'adyen' || flow === 'token') {
                 return this._super(...arguments); // Tokens are handled by the generic flow
             }
@@ -205,7 +235,7 @@ odoo.define('payment_adyen.payment_form', require => {
                     _t("Server Error"), _t("We are not able to process your payment.")
                 );
             } else {
-                return this.adyenDropin.submit();
+                return await this.adyenDropin.submit();
             }
         },
 

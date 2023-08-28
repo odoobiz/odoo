@@ -10,16 +10,19 @@
 # Martin Wilderoth <martin.wilderoth@linserv.se>, 2021
 # Chrille Hedberg <hedberg.chrille@gmail.com>, 2021
 # Simon S, 2021
+# Daniel Osser <danielosser@gmail.com>, 2021
 # Kim Asplund <kim.asplund@gmail.com>, 2021
+# Mikael Åkerberg <mikael.akerberg@mariaakerberg.com>, 2022
+# Lasse L, 2023
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.5\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 10:28+0000\n"
+"POT-Creation-Date: 2021-11-16 13:18+0000\n"
 "PO-Revision-Date: 2021-09-14 12:25+0000\n"
-"Last-Translator: Kim Asplund <kim.asplund@gmail.com>, 2021\n"
-"Language-Team: Swedish (https://www.transifex.com/odoo/teams/41243/sv/)\n"
+"Last-Translator: Lasse L, 2023\n"
+"Language-Team: Swedish (https://app.transifex.com/odoo/teams/41243/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -215,7 +218,7 @@ msgstr ""
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__background_color
 msgid "Background Color"
-msgstr ""
+msgstr "Bakgrundsfärg"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__background_image
@@ -249,6 +252,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_config__iface_splitbill
 #, python-format
 msgid "Bill Splitting"
+msgstr ""
+
+#. module: pos_restaurant
+#. openerp-web
+#: code:addons/pos_restaurant/static/src/js/Screens/ProductScreen/ControlButtons/TableGuestsButton.js:0
+#, python-format
+msgid "Blocked action"
 msgstr ""
 
 #. module: pos_restaurant
@@ -315,6 +325,13 @@ msgid "Color"
 msgstr "Färg"
 
 #. module: pos_restaurant
+#. openerp-web
+#: code:addons/pos_restaurant/static/src/js/ChromeWidgets/TicketButton.js:0
+#, python-format
+msgid "Connection Error"
+msgstr ""
+
+#. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__create_uid
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_printer__create_uid
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__create_uid
@@ -355,6 +372,13 @@ msgstr ""
 
 #. module: pos_restaurant
 #. openerp-web
+#: code:addons/pos_restaurant/static/src/js/ChromeWidgets/TicketButton.js:0
+#, python-format
+msgid "Due to a connection error, the orders are not synchronized."
+msgstr ""
+
+#. module: pos_restaurant
+#. openerp-web
 #: code:addons/pos_restaurant/static/src/xml/Screens/FloorScreen/EditBar.xml:0
 #: code:addons/pos_restaurant/static/src/xml/Screens/FloorScreen/EditBar.xml:0
 #, python-format
@@ -381,6 +405,13 @@ msgstr "Redigera"
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_pos_config__iface_splitbill
 msgid "Enables Bill Splitting in the Point of Sale."
+msgstr ""
+
+#. module: pos_restaurant
+#. openerp-web
+#: code:addons/pos_restaurant/static/src/js/Screens/ProductScreen/ControlButtons/SubmitOrderButton.js:0
+#, python-format
+msgid "Failed in printing the changes in the order"
 msgstr ""
 
 #. module: pos_restaurant
@@ -661,6 +692,7 @@ msgstr ""
 #: code:addons/pos_restaurant/static/src/js/Screens/FloorScreen/FloorScreen.js:0
 #: code:addons/pos_restaurant/static/src/js/Screens/FloorScreen/FloorScreen.js:0
 #: code:addons/pos_restaurant/static/src/js/Screens/FloorScreen/FloorScreen.js:0
+#: code:addons/pos_restaurant/static/src/js/Screens/FloorScreen/FloorScreen.js:0
 #, python-format
 msgid "Offline"
 msgstr "Offline"
@@ -801,7 +833,14 @@ msgstr "Printer Typ"
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.pos_config_view_form_inherit_restaurant
 msgid "Printers"
-msgstr ""
+msgstr "Skrivare"
+
+#. module: pos_restaurant
+#. openerp-web
+#: code:addons/pos_restaurant/static/src/js/Screens/ProductScreen/ControlButtons/SubmitOrderButton.js:0
+#, python-format
+msgid "Printing failed"
+msgstr "Utskrift misslyckades"
 
 #. module: pos_restaurant
 #. openerp-web
@@ -965,7 +1004,7 @@ msgstr ""
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__shape
 msgid "Shape"
-msgstr ""
+msgstr "Form"
 
 #. module: pos_restaurant
 #. openerp-web
@@ -1000,7 +1039,7 @@ msgstr ""
 #. module: pos_restaurant
 #: model:ir.model.fields.selection,name:pos_restaurant.selection__restaurant_table__shape__square
 msgid "Square"
-msgstr ""
+msgstr "Fyrkant"
 
 #. module: pos_restaurant
 #. openerp-web
@@ -1019,11 +1058,13 @@ msgstr "Delsumma"
 
 #. module: pos_restaurant
 #. openerp-web
+#: code:addons/pos_restaurant/static/src/js/Screens/TicketScreen.js:0
+#: code:addons/pos_restaurant/static/src/xml/Screens/TicketScreen.xml:0
 #: code:addons/pos_restaurant/static/src/xml/Screens/TicketScreen.xml:0
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__table_id
 #, python-format
 msgid "Table"
-msgstr ""
+msgstr "Tabell"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__name
@@ -1132,6 +1173,15 @@ msgstr ""
 
 #. module: pos_restaurant
 #. openerp-web
+#: code:addons/pos_restaurant/static/src/js/Screens/TipScreen.js:0
+#, python-format
+msgid ""
+"This order is not yet synced to server. Make sure it is synced then try "
+"again."
+msgstr ""
+
+#. module: pos_restaurant
+#. openerp-web
 #: code:addons/pos_restaurant/static/src/xml/Screens/FloorScreen/EditBar.xml:0
 #: code:addons/pos_restaurant/static/src/xml/Screens/FloorScreen/EditBar.xml:0
 #, python-format
@@ -1140,6 +1190,7 @@ msgstr ""
 
 #. module: pos_restaurant
 #. openerp-web
+#: code:addons/pos_restaurant/static/src/xml/Screens/TicketScreen.xml:0
 #: code:addons/pos_restaurant/static/src/xml/Screens/TicketScreen.xml:0
 #, python-format
 msgid "Tip"
@@ -1205,6 +1256,13 @@ msgid "Unable to delete table"
 msgstr ""
 
 #. module: pos_restaurant
+#. openerp-web
+#: code:addons/pos_restaurant/static/src/js/Screens/FloorScreen/FloorScreen.js:0
+#, python-format
+msgid "Unable to get orders count"
+msgstr ""
+
+#. module: pos_restaurant
 #: model:product.product,uom_name:pos_restaurant.coke
 #: model:product.product,uom_name:pos_restaurant.minute_maid
 #: model:product.product,uom_name:pos_restaurant.pos_food_4formaggi
@@ -1243,6 +1301,13 @@ msgstr ""
 #: model:product.template,uom_name:pos_restaurant.water_product_template
 msgid "Units"
 msgstr "Enheter"
+
+#. module: pos_restaurant
+#. openerp-web
+#: code:addons/pos_restaurant/static/src/js/Screens/TipScreen.js:0
+#, python-format
+msgid "Unsynced order"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_floor__sequence
@@ -1294,6 +1359,13 @@ msgstr ""
 #, python-format
 msgid "Yellow"
 msgstr "Gul"
+
+#. module: pos_restaurant
+#. openerp-web
+#: code:addons/pos_restaurant/static/src/js/Screens/ProductScreen/ControlButtons/TableGuestsButton.js:0
+#, python-format
+msgid "You cannot put a number that exceeds %s "
+msgstr ""
 
 #. module: pos_restaurant
 #: code:addons/pos_restaurant/models/pos_restaurant.py:0
@@ -1359,4 +1431,10 @@ msgstr "rabatt"
 #: code:addons/pos_restaurant/static/src/xml/Screens/PaymentScreen/PaymentScreen.xml:0
 #, python-format
 msgid "env.pos.config.set_tip_after_payment and !currentOrder.is_paid()"
+msgstr ""
+
+#. module: pos_restaurant
+#: code:addons/pos_restaurant/models/pos_config.py:0
+#, python-format
+msgid "Cash Bar"
 msgstr ""

@@ -9,9 +9,8 @@
 # Dinar <gabbasov@it-projects.info>, 2021
 # Ekaterina <nawsikaya@bk.ru>, 2021
 # Диляра Дельтаева <dilya.kz93@gmail.com>, 2021
-# Martin Trigaux, 2021
 # Collex100, 2021
-# Ivan Yelizariev // IEL <yelizariev@itpp.dev>, 2021
+# Ivan Kropotkin <yelizariev@itpp.dev>, 2021
 # Sergey Vilizhanin, 2021
 # Viktor Pogrebniak <vp@aifil.ru>, 2021
 # Vasiliy Korobatov <korobatov@gmail.com>, 2021
@@ -20,16 +19,18 @@
 # Oleg Kuryan <oleg@ventor.tech>, 2021
 # Константин Коровин <korovin74@gmail.com>, 2021
 # Irina Fedulova <istartlin@gmail.com>, 2021
-# Сергей Шебанин <sergey@shebanin.ru>, 2021
+# Martin Trigaux, 2021
+# Сергей Шебанин <sergey@shebanin.ru>, 2022
+# Alena Vlasova, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 10:53+0000\n"
+"POT-Creation-Date: 2022-07-26 11:51+0000\n"
 "PO-Revision-Date: 2021-09-14 12:28+0000\n"
-"Last-Translator: Сергей Шебанин <sergey@shebanin.ru>, 2021\n"
-"Language-Team: Russian (https://www.transifex.com/odoo/teams/41243/ru/)\n"
+"Last-Translator: Alena Vlasova, 2022\n"
+"Language-Team: Russian (https://app.transifex.com/odoo/teams/41243/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -287,16 +288,16 @@ msgstr "<span class=\"o_form_label\">Письмо для подтвержени�
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Invoicing Policy</span>"
-msgstr "<span class=\"o_form_label\">Политика выставления счета</span>"
-
-#. module: website_sale
-#: model_terms:ir.ui.view,arch_db:website_sale.extra_info
-msgid "<span class=\"s_website_form_label_content\">A document to provide</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Политика актирования</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.extra_info
 msgid "<span class=\"s_website_form_label_content\">Give us your feedback</span>"
+msgstr ""
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.extra_info
+msgid "<span class=\"s_website_form_label_content\">Upload a document</span>"
 msgstr ""
 
 #. module: website_sale
@@ -339,6 +340,13 @@ msgstr "<span>Заказ</span>"
 #: model_terms:ir.ui.view,arch_db:website_sale.short_cart_summary
 msgid "<span>Process Checkout</span>"
 msgstr "<span>оформить заказ</span>"
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.payment_confirmation_status
+msgid ""
+"<span>Unfortunately your order can not be confirmed as the amount of your payment does not match the amount of your cart.\n"
+"                        Please contact the responsible of the shop for more information.</span>"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_product_image_form
@@ -555,6 +563,11 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
 msgid "Acceptable file size"
+msgstr ""
+
+#. module: website_sale
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_cross_selling_accessories
+msgid "Accessories for Product"
 msgstr ""
 
 #. module: website_sale
@@ -885,6 +898,12 @@ msgstr ""
 "экранов."
 
 #. module: website_sale
+#: code:addons/website_sale/models/product_template.py:0
+#, python-format
+msgid "Categories:"
+msgstr ""
+
+#. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_searchbar_input_snippet_options
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_template_options
 msgid "Category"
@@ -898,8 +917,8 @@ msgstr ""
 #. module: website_sale
 #: code:addons/website_sale/models/product_template.py:0
 #, python-format
-msgid "Category: %s"
-msgstr "Категория:  %s "
+msgid "Category:"
+msgstr ""
 
 #. module: website_sale
 #: code:addons/website_sale/models/website_snippet_filter.py:0
@@ -934,6 +953,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__child_id
 msgid "Children Categories"
 msgstr "Детские категории"
+
+#. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
+msgid ""
+"Changing your name is not allowed once invoices have been issued for your "
+"account. Please contact us directly for this operation."
+msgstr ""
+"Изменение имени не допускается, так как были выставлены акты для вашей "
+"учетной записи. Пожалуйста, свяжитесь с нами для этой операции."
 
 #. module: website_sale
 #: model:ir.actions.act_window,name:website_sale.action_open_website_sale_onboarding_payment_acquirer_wizard
@@ -1038,6 +1067,7 @@ msgid "Config Settings"
 msgstr "Конфигурационные настройки"
 
 #. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.payment
 #: model_terms:ir.ui.view,arch_db:website_sale.wizard_checkout
 msgid "Confirm Order"
 msgstr "Подтвердить заказ"
@@ -1151,8 +1181,8 @@ msgstr "Покупатели"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
-msgid "DHL"
-msgstr "DHL"
+msgid "DHL Express Connector"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__currency_id
@@ -1459,13 +1489,13 @@ msgstr ""
 #: code:addons/website_sale/static/src/xml/website_sale_dashboard.xml:0
 #, python-format
 msgid "Generate an invoice from orders ready for invoicing."
-msgstr "Сгенерировать счет-фактуру из заказов, готовых к выставлению счета."
+msgstr "Сгенерировать акт из заказов, готовых к выставлению акта."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid ""
 "Generate the invoice automatically when the online payment is confirmed"
-msgstr "Создавать счет автоматически при получении онлайн-платежа"
+msgstr "Создавать акт автоматически при получении онлайн-платежа"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__module_website_sale_gift_card
@@ -1547,25 +1577,25 @@ msgstr "Изображение"
 #: model:ir.model.fields,field_description:website_sale.field_product_image__image_1024
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__image_1024
 msgid "Image 1024"
-msgstr ""
+msgstr "Изображение 1024"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_image__image_128
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__image_128
 msgid "Image 128"
-msgstr ""
+msgstr "Изображение 128"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_image__image_256
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__image_256
 msgid "Image 256"
-msgstr ""
+msgstr "Изображение 256"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_image__image_512
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__image_512
 msgid "Image 512"
-msgstr ""
+msgstr "Изображение 512"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_product_image_form
@@ -1582,13 +1612,13 @@ msgstr ""
 #. module: website_sale
 #: model:ir.actions.act_window,name:website_sale.action_invoices_ecommerce
 msgid "Invoices"
-msgstr "Счета"
+msgstr "Акты"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__module_account
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Invoicing"
-msgstr "Выставление счетов"
+msgstr "Актирование"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_template__is_published
@@ -1600,7 +1630,7 @@ msgstr "Опубликовано"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Issue invoices to customers"
-msgstr "Выставления счетов клиентам"
+msgstr "Выставление актов клиентам"
 
 #. module: website_sale
 #: code:addons/website_sale/models/sale_order.py:0
@@ -1785,6 +1815,7 @@ msgstr "Корзина"
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__name
 #: model:ir.model.fields,field_description:website_sale.field_website_base_unit__name
 #: model_terms:ir.ui.view,arch_db:website_sale.address
+#: model_terms:ir.ui.view,arch_db:website_sale.product_ribbon_view_tree
 #: model_terms:ir.ui.view,arch_db:website_sale.sort
 msgid "Name"
 msgstr "Название"
@@ -1809,6 +1840,7 @@ msgstr ""
 
 #. module: website_sale
 #: model:ir.filters,name:website_sale.dynamic_snippet_newest_products_filter
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_newest_products
 msgid "Newest Products"
 msgstr ""
 
@@ -2042,14 +2074,14 @@ msgstr "напоминание заказов"
 #. module: website_sale
 #: model:ir.actions.act_window,name:website_sale.sale_order_action_to_invoice
 msgid "Orders To Invoice"
-msgstr "Заказы к Оплате"
+msgstr "Заказы для выставления акта"
 
 #. module: website_sale
 #. openerp-web
 #: code:addons/website_sale/static/src/xml/website_sale_dashboard.xml:0
 #, python-format
 msgid "Orders to Invoice"
-msgstr "Заказы к оплате"
+msgstr "Заказы для выставления акта"
 
 #. module: website_sale
 #. openerp-web
@@ -2088,6 +2120,11 @@ msgstr "Родительский путь"
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__parents_and_self
 msgid "Parents And Self"
 msgstr ""
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.payment
+msgid "Pay Now"
+msgstr "Оплатить сейчас"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment
@@ -2386,6 +2423,11 @@ msgid "Products Recently Sold With"
 msgstr ""
 
 #. module: website_sale
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_cross_selling_recently_sold_with
+msgid "Products Recently Sold With Product"
+msgstr ""
+
+#. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website_visitor__product_count
 msgid "Products Views"
 msgstr ""
@@ -2493,11 +2535,13 @@ msgstr "Причина оценки"
 
 #. module: website_sale
 #: model:ir.actions.server,name:website_sale.dynamic_snippet_latest_sold_products_action
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_latest_sold_products
 msgid "Recently Sold Products"
 msgstr ""
 
 #. module: website_sale
 #: model:ir.actions.server,name:website_sale.dynamic_snippet_latest_viewed_products_action
+#: model:website.snippet.filter,name:website_sale.dynamic_filter_latest_viewed_products
 msgid "Recently Viewed Products"
 msgstr ""
 
@@ -2746,7 +2790,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__seo_name
 #: model:ir.model.fields,field_description:website_sale.field_product_template__seo_name
 msgid "Seo name"
-msgstr ""
+msgstr "Seo имя"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_image__sequence
@@ -2998,6 +3042,18 @@ msgid "The #1"
 msgstr ""
 
 #. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
+msgid "The access token is invalid."
+msgstr ""
+
+#. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
+msgid "The cart has been updated. Please refresh the page."
+msgstr ""
+
+#. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__website_url
 #: model:ir.model.fields,help:website_sale.field_product_template__website_url
 msgid "The full URL to access the document through the website."
@@ -3022,8 +3078,14 @@ msgid ""
 "The mode selected here applies as invoicing policy of any new product "
 "created but not of products already existing."
 msgstr ""
-"Выбранный режим применяется здесь как политика выставления счетов любого "
-"нового товара, но не существующего."
+"Выбранный режим применяется здесь как политика актирования любого нового "
+"товара, но не существующего."
+
+#. module: website_sale
+#: code:addons/website_sale/controllers/main.py:0
+#, python-format
+msgid "The order has been canceled."
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__public_categ_ids
@@ -3384,7 +3446,7 @@ msgstr "Изображение для публикации в соцсети"
 #: model:ir.model.fields,help:website_sale.field_account_move__website_id
 #: model:ir.model.fields,help:website_sale.field_account_payment__website_id
 msgid "Website through which this invoice was created."
-msgstr "Веб-сайт, через который был создан этот счет-фактура."
+msgstr "Веб-сайт, через который был создан этот акт."
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_sale_order__website_id
@@ -3453,7 +3515,7 @@ msgstr "В вас нет ни одного заказа с сайта"
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.sale_order_action_to_invoice
 msgid "You don't have any order to invoice from the website"
-msgstr "Вы не имеете ни одного заказа для выставления счета с сайта"
+msgstr "У вас нет ни одного заказа для выставления акта с сайта"
 
 #. module: website_sale
 #: model:mail.template,subject:website_sale.mail_template_sale_cart_recovery

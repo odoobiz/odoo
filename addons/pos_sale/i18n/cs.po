@@ -3,25 +3,33 @@
 # 	* pos_sale
 # 
 # Translators:
-# Martin Trigaux, 2021
-# Jan Horzinka <jan.horzinka@centrum.cz>, 2021
 # Michal Veselý <michal@veselyberanek.net>, 2021
-# trendspotter <jirka.p@volny.cz>, 2021
+# Jiří Podhorecký, 2021
 # Rastislav Brencic <rastislav.brencic@azet.sk>, 2021
+# Martin Trigaux, 2021
+# Aleš Fiala <f.ales1@seznam.cz>, 2023
+# SlavekB <slavek.banko@axis.cz>, 2023
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.5\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 10:28+0000\n"
+"POT-Creation-Date: 2021-11-16 13:18+0000\n"
 "PO-Revision-Date: 2021-09-14 12:25+0000\n"
-"Last-Translator: Rastislav Brencic <rastislav.brencic@azet.sk>, 2021\n"
-"Language-Team: Czech (https://www.transifex.com/odoo/teams/41243/cs/)\n"
+"Last-Translator: SlavekB <slavek.banko@axis.cz>, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#. module: pos_sale
+#. openerp-web
+#: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderRow.xml:0
+#, python-format
+msgid "(left:"
+msgstr ""
 
 #. module: pos_sale
 #. openerp-web
@@ -43,6 +51,13 @@ msgstr "<span class=\"o_form_label\">Obchodní tým</span>"
 #. module: pos_sale
 #: model_terms:ir.ui.view,arch_db:pos_sale.report_invoice_document
 msgid "<span style=\"margin: 0px 5px;\">:</span>"
+msgstr ""
+
+#. module: pos_sale
+#. openerp-web
+#: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
+#, python-format
+msgid "Apply a down payment"
 msgstr ""
 
 #. module: pos_sale
@@ -81,13 +96,22 @@ msgstr "Kurz měny"
 #. module: pos_sale
 #. openerp-web
 #: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderList.xml:0
+#: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderRow.xml:0
 #, python-format
 msgid "Customer"
 msgstr "Zákazník"
 
 #. module: pos_sale
 #. openerp-web
+#: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
+#, python-format
+msgid "Customer loading error"
+msgstr ""
+
+#. module: pos_sale
+#. openerp-web
 #: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderList.xml:0
+#: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderRow.xml:0
 #, python-format
 msgid "Date"
 msgstr "Datum"
@@ -139,6 +163,15 @@ msgstr "Od"
 #: model:ir.model.fields.selection,name:pos_sale.selection__sale_report__state__invoiced
 msgid "Invoiced"
 msgstr "Fakturováno"
+
+#. module: pos_sale
+#. openerp-web
+#: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
+#, python-format
+msgid ""
+"It seems that you didn't configure a down payment product in your point of sale.\n"
+"                        You can go to your point of sale configuration to choose one."
+msgstr ""
 
 #. module: pos_sale
 #: code:addons/pos_sale/models/sale_order.py:0
@@ -194,6 +227,13 @@ msgid "No"
 msgstr "Ne"
 
 #. module: pos_sale
+#. openerp-web
+#: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
+#, python-format
+msgid "No down payment product"
+msgstr ""
+
+#. module: pos_sale
 #: model:ir.model.fields,field_description:pos_sale.field_crm_team__pos_sessions_open_count
 msgid "Open POS Sessions"
 msgstr "Otevřené sezení Prodejního místa"
@@ -206,6 +246,7 @@ msgstr ""
 #. module: pos_sale
 #. openerp-web
 #: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderList.xml:0
+#: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderRow.xml:0
 #, python-format
 msgid "Order"
 msgstr "Objednávka"
@@ -222,26 +263,11 @@ msgid "Paid"
 msgstr "Zaplaceno"
 
 #. module: pos_sale
-#: model_terms:ir.ui.view,arch_db:pos_sale.report_invoice_document
-msgid "Paid on"
-msgstr "Uhrazeno dne"
-
-#. module: pos_sale
-#: model_terms:ir.ui.view,arch_db:pos_sale.report_invoice_document
-msgid "Paid with"
-msgstr ""
-
-#. module: pos_sale
 #. openerp-web
 #: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
 #, python-format
 msgid "Percentage of %s"
 msgstr ""
-
-#. module: pos_sale
-#: model_terms:ir.ui.view,arch_db:pos_sale.report_invoice_document
-msgid "Please use the following communication for your payment :"
-msgstr "Pro platbu prosím použijte následující sdělení:"
 
 #. module: pos_sale
 #: model:ir.model,name:pos_sale.model_pos_config
@@ -271,7 +297,7 @@ msgstr "Prodejní místo"
 #. module: pos_sale
 #: model:ir.model.fields,field_description:pos_sale.field_sale_order__pos_order_count
 msgid "Pos Order Count"
-msgstr ""
+msgstr "Počet objednávek místa prodeje"
 
 #. module: pos_sale
 #: model:ir.model.fields.selection,name:pos_sale.selection__sale_report__state__pos_done
@@ -312,7 +338,7 @@ msgstr "Nabídka odeslána"
 #: code:addons/pos_sale/static/src/xml/SetSaleOrderButton.xml:0
 #, python-format
 msgid "Quotation/Order"
-msgstr ""
+msgstr "Nabídka/Objednávka"
 
 #. module: pos_sale
 #. openerp-web
@@ -372,6 +398,13 @@ msgstr "Prodej je hlášen následujícímu prodejnímu týmu"
 
 #. module: pos_sale
 #. openerp-web
+#: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderRow.xml:0
+#, python-format
+msgid "Salesman"
+msgstr "Pokladník"
+
+#. module: pos_sale
+#. openerp-web
 #: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderList.xml:0
 #, python-format
 msgid "Salesperson"
@@ -404,6 +437,13 @@ msgstr ""
 #. openerp-web
 #: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
 #, python-format
+msgid "Settle the order"
+msgstr ""
+
+#. module: pos_sale
+#. openerp-web
+#: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
+#, python-format
 msgid ""
 "Some of the products in your Sale Order are not available in POS, do you "
 "want to import them?"
@@ -417,6 +457,7 @@ msgstr ""
 #. module: pos_sale
 #. openerp-web
 #: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderList.xml:0
+#: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderRow.xml:0
 #, python-format
 msgid "State"
 msgstr "Stav"
@@ -432,6 +473,13 @@ msgid ""
 "The rate of the currency to the currency of rate applicable at the date of "
 "the order"
 msgstr "Kurz měny k měně sazby použitelné ke dni objednávky"
+
+#. module: pos_sale
+#. openerp-web
+#: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
+#, python-format
+msgid "There was a problem in loading the %s customer."
+msgstr ""
 
 #. module: pos_sale
 #: model:ir.model.fields,help:pos_sale.field_pos_config__crm_team_id
@@ -453,6 +501,7 @@ msgstr ""
 #. module: pos_sale
 #. openerp-web
 #: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderList.xml:0
+#: code:addons/pos_sale/static/src/xml/OrderManagementScreen/SaleOrderRow.xml:0
 #, python-format
 msgid "Total"
 msgstr "Celkem"
@@ -498,3 +547,12 @@ msgstr "Co chcete dělat?"
 #, python-format
 msgid "Yes"
 msgstr "Ano"
+
+#. module: pos_sale
+#. openerp-web
+#: code:addons/pos_sale/static/src/js/OrderManagementScreen/SaleOrderManagementScreen.js:0
+#, python-format
+msgid ""
+"You have tried to charge a down payment of %s but only %s remains to be "
+"paid, %s will be applied to the purchase order line."
+msgstr ""

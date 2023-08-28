@@ -111,7 +111,7 @@ class HrEmployeePrivate(models.Model):
         string='Tags')
     # misc
     notes = fields.Text('Notes', groups="hr.group_hr_user")
-    color = fields.Integer('Color Index', default=0, groups="hr.group_hr_user")
+    color = fields.Integer('Color Index', default=0)
     barcode = fields.Char(string="Badge ID", help="ID used for employee identification.", groups="hr.group_hr_user", copy=False)
     pin = fields.Char(string="PIN", groups="hr.group_hr_user", copy=False,
         help="PIN used to Check In/Out in the Kiosk Mode of the Attendance application (if enabled in Configuration) and to change the cashier in the Point of Sale application.")
@@ -183,7 +183,7 @@ class HrEmployeePrivate(models.Model):
             responsible_user_id = employee.parent_id.user_id.id
             if responsible_user_id:
                 employees_scheduled |= employee
-                lang = self.env['res.partner'].browse(responsible_user_id).lang
+                lang = self.env['res.users'].browse(responsible_user_id).lang
                 formated_date = format_date(employee.env, employee.work_permit_expiration_date, date_format="dd MMMM y", lang_code=lang)
                 employee.activity_schedule(
                     'mail.mail_activity_data_todo',
@@ -219,7 +219,10 @@ class HrEmployeePrivate(models.Model):
         """
         if self.check_access_rights('read', raise_exception=False):
             return super(HrEmployeePrivate, self)._search(args, offset=offset, limit=limit, order=order, count=count, access_rights_uid=access_rights_uid)
-        ids = self.env['hr.employee.public']._search(args, offset=offset, limit=limit, order=order, count=count, access_rights_uid=access_rights_uid)
+        try:
+            ids = self.env['hr.employee.public']._search(args, offset=offset, limit=limit, order=order, count=count, access_rights_uid=access_rights_uid)
+        except ValueError:
+            raise AccessError(_('You do not have access to this document.'))
         if not count and isinstance(ids, Query):
             # the result is expected from this table, so we should link tables
             ids = super(HrEmployeePrivate, self.sudo())._search([('id', 'in', ids)])
@@ -290,6 +293,7 @@ class HrEmployeePrivate(models.Model):
             self.env['mail.channel'].sudo().search([
                 ('subscription_department_ids', 'in', employee.department_id.id)
             ])._subscribe_users_automatically()
+        employee._message_subscribe(employee.address_home_id.ids)
         # Launch onboarding plans
         url = '/web#%s' % url_encode({
             'action': 'hr.plan_wizard_action',
@@ -302,13 +306,16 @@ class HrEmployeePrivate(models.Model):
 
     def write(self, vals):
         if 'address_home_id' in vals:
-            account_id = vals.get('bank_account_id') or self.bank_account_id.id
-            if account_id:
-                self.env['res.partner.bank'].browse(account_id).partner_id = vals['address_home_id']
+            account_ids = vals.get('bank_account_id') or self.bank_account_id.ids
+            if account_ids:
+                self.env['res.partner.bank'].browse(account_ids).partner_id = vals['address_home_id']
+            self.message_unsubscribe(self.address_home_id.ids)
+            if vals['address_home_id']:
+                self._message_subscribe([vals['address_home_id']])
         if vals.get('user_id'):
             # Update the profile pictures with user, except if provided 
             vals.update(self._sync_user(self.env['res.users'].browse(vals['user_id']),
-                                        (bool(self.image_1920))))
+                                        (bool(all(emp.image_1920 for emp in self)))))
         if 'work_permit_expiration_date' in vals:
             vals['work_permit_scheduled_activity'] = False
         res = super(HrEmployeePrivate, self).write(vals)

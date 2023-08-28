@@ -35,7 +35,7 @@ class UoMCategory(models.Model):
             else:
                 new_reference = self.uom_ids.filtered(lambda o: o.uom_type == 'reference' and o._origin.uom_type != 'reference')
             if new_reference:
-                other_uoms = self.uom_ids - new_reference
+                other_uoms = self.uom_ids.filtered(lambda u: u._origin.id) - new_reference
                 for uom in other_uoms:
                     uom.factor = uom._origin.factor / (new_reference._origin.factor or 1)
                     if uom.factor > 1:
@@ -113,6 +113,8 @@ class UoM(models.Model):
                 uom.ratio = uom.factor
 
     def _set_ratio(self):
+        if self.ratio == 0:
+            raise ValidationError(_("The value of ratio could not be Zero"))
         if self.uom_type == 'reference':
             self.factor = 1
         elif self.uom_type == 'bigger':
@@ -243,7 +245,7 @@ class UoM(models.Model):
 
     def _filter_protected_uoms(self):
         """Verifies self does not contain protected uoms."""
-        linked_model_data = self.env['ir.model.data'].search([
+        linked_model_data = self.env['ir.model.data'].sudo().search([
             ('model', '=', self._name),
             ('res_id', 'in', self.ids),
             ('module', '=', 'uom'),
